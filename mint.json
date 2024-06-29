@@ -58,29 +58,19 @@
       ]
     },
     {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "OTP",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete",
-        "api-reference/endpoint/update"
+        "api-reference/otp/request",
+        "api-reference/otp/verify",
+        "api-reference/otp/revoke",
+        "api-reference/otp/get",
+        "api-reference/otp/get-by-recipient"
       ]
     }
   ],

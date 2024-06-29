@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "OpenAPI Simpu API",
+    "description": "Simpu API Documentation",
     "license": {
       "name": "MIT"
     },
@@ -10,44 +10,41 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.simpu.co"
     }
   ],
   "security": [
     {
-      "bearerAuth": []
+      "apiKeyAuth": []
     }
   ],
   "paths": {
-    "/plants": {
+    "/otp/{id}": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Retrieve a single OTP based on the ID supplied",
         "parameters": [
           {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
+            "name": "id",
+            "in": "path",
+            "description": "ID of OTP to retrieve",
+            "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "OTP response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/OTP"
                 }
               }
             }
           },
-          "400": {
+          "404": {
             "description": "Unexpected error",
             "content": {
               "application/json": {
@@ -59,61 +56,22 @@
           }
         }
       },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
       "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+        "description": "Revoke a single OTP based on the ID supplied",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of plant to delete",
+            "description": "ID of OTP to revoke",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Plant deleted",
+            "description": "OTP revoked",
             "content": {}
           },
           "400": {
@@ -128,67 +86,268 @@
           }
         }
       }
+    },
+    "/otp/request_token": {
+      "post": {
+        "description": "Request an OTP token",
+        "requestBody": {
+          "description": "OTP request object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OTPTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OTP response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OTP"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otp/verify": {
+      "post": {
+        "description": "Verify an OTP token",
+        "requestBody": {
+          "description": "OTP verify request object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OTPVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OTP response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OTP"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Token not found or expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otp/get_by_recipient": {
+      "get": {
+        "description": "Retrieve all OTPs based on the recipient supplied",
+        "parameters": [
+          {
+            "name": "recipient",
+            "in": "path",
+            "description": "Recipient of OTPs to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OTP"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "OTP": {
         "required": [
-          "name"
+          "id",
+          "recipient",
+          "status",
+          "status_desc",
+          "created_datetime"
         ],
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "recipient": {
+            "description": "Recipient of the OTP token",
+            "type": "string",
+            "example": "2348023456789"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "status": {
+            "description": "Status of the OTP token",
+            "type": "number",
+            "example": 1
+          },
+          "status_desc": {
+            "description": "Description of the status of the OTP token",
+            "type": "string",
+            "example": "SENT"
+          },
+          "created_datetime": {
+            "description": "Date and time the OTP token was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the OTP token was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "OTPTokenRequest": {
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "description": "Recipient of the OTP token",
+            "type": "string",
+            "example": "2348023456789"
           },
-          {
-            "required": [
-              "id"
+          "length": {
+            "description": "Length of the OTP token",
+            "type": "number",
+            "example": 6,
+            "default": 4,
+            "minimum": 4,
+            "maximum": 8
+          },
+          "expires_in": {
+            "description": "Time in minutes before the OTP token expires",
+            "type": "number",
+            "example": 30,
+            "default": 15,
+            "minimum": 1,
+            "maximum": 60
+          },
+          "token": {
+            "description": "The OTP token to send to the recipient, if not specified, a new token will be generated",
+            "type": "string",
+            "example": "123456"
+          },
+          "channel": {
+            "description": "The channel to send the OTP token to the recipient",
+            "type": "string",
+            "example": "sms",
+            "enum": [
+              "sms",
+              "email",
+              "whatsapp"
             ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+            "default": "sms"
+          },
+          "channel_id": {
+            "description": "The channel ID to use for sending the OTP token",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           }
+        },
+        "required": [
+          "recipient"
+        ]
+      },
+      "OTPVerifyRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "description": "The OTP token to verify",
+            "type": "string",
+            "example": "123456"
+          },
+          "id": {
+            "description": "The ID of the OTP token to verify",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          }
+        },
+        "required": [
+          "token",
+          "id"
         ]
       },
       "Error": {
         "required": [
-          "error",
+          "status",
           "message"
         ],
         "type": "object",
         "properties": {
-          "error": {
+          "status": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "example": 200
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "example": "Invalid request"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error in field: 'name' Field required."
+                },
+                "type": {
+                  "type": "string",
+                  "example": "missing"
+                }
+              }
+            }
           }
         }
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "An API key to authenticate requests"
       }
     }
   }
