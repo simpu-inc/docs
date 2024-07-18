@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.simpu.co"
+      "url": "https://api.v1.simpu.co"
     }
   ],
   "security": [
@@ -19,6 +19,82 @@
     }
   ],
   "paths": {
+    "/sms/send": {
+      "post": {
+        "description": "Send an SMS message",
+        "requestBody": {
+          "description": "SMS message object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendSMSRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SMS response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/email/send": {
+      "post": {
+        "description": "Send an SMS message",
+        "requestBody": {
+          "description": "SMS message object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendSMSRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SMS response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/otp/{id}": {
       "get": {
         "description": "Retrieve a single OTP based on the ID supplied",
@@ -197,6 +273,75 @@
   },
   "components": {
     "schemas": {
+      "SMS": {
+        "required": [
+          "id",
+          "recipients",
+          "is_trackable",
+          "sender_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+              "description": "ID of the SMS message",
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "recipients": {
+            "description": "Recipients of the SMS message",
+            "type": "array",
+            "example": ["2348023456789"]
+          },
+          "sender_id": {
+              "description": "Sender ID of the SMS message",
+              "type": "string",
+              "example": "Simpu",
+              "maxLength": 11
+          },
+          "is_trackable": {
+              "description": "This determines if links in the message should be tracked",
+              "type": "boolean",
+              "example": false
+          },
+          "content": {
+              "description": "Content of the SMS message",
+              "type": "string",
+              "example": "Hello! World. This is a test message."
+          },
+          "external_ref": {
+              "description": "This is a reference to the message in your system",
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "callback": {
+              "description": "This is the URL to receive delivery reports for the message",
+              "type": "string",
+              "example": "https://example.com/sms/delivery_report"
+          },
+          "template_id": {
+              "description": "Template ID of the SMS message",
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "personalisation": {
+            "description": "Personalisation of the SMS message",
+            "type": "array",
+            "items": {
+                "$ref": "#/components/schemas/Personalisation"
+            }
+          },
+          "created_datetime": {
+            "description": "Date and time the OTP token was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the OTP token was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
       "OTP": {
         "required": [
           "id",
@@ -207,6 +352,11 @@
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "description": "ID of the OTP token",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
           "recipient": {
             "description": "Recipient of the OTP token",
             "type": "string",
@@ -233,6 +383,79 @@
             "example": "2024-06-28T23:56:38.128604+00:00"
           }
         }
+      },
+      "Personalisation": {
+        "required": [
+          "to",
+          "substitutions"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "description": "Recipient of the personalisation",
+            "type": "string",
+            "example": "2348023456789"
+          },
+          "substitutions": {
+            "description": "Substitutions of the personalisation",
+            "type": "object",
+            "example": {
+              "name": "John Doe"
+            }
+          }
+        }
+      },
+      "SendSMSRequest": {
+        "type": "object",
+        "properties": {
+          "recipients": {
+            "description": "Recipients of the SMS message, comma separated list of phone numbers",
+            "type": "string",
+            "example": "2348023456789, 2348098765432"
+          },
+          "sender_id": {
+            "description": "Sender ID of the SMS message",
+            "type": "string",
+            "example": "Simpu",
+            "maxLength": 11
+          },
+          "content": {
+            "description": "Content of the SMS message, this is required if a template ID is not specified",
+            "type": "string",
+            "example": "Hello! World. This is a test message."
+          },
+          "template_id": {
+            "description": "Template ID of the SMS message, this is required if content is not specified",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "personalisation": {
+            "description": "Personalisation of the SMS message, this is applicable if a template ID is specified",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Personalisation"
+            }
+          },
+          "external_ref": {
+            "description": "This is a reference to the message in your system",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "is_trackable": {
+            "description": "This determines if links in the message should be tracked, links in the message will be replaced with trackable links",
+            "type": "boolean",
+            "default": false,
+            "example": false
+          },
+          "callback": {
+            "description": "This is the URL to receive delivery reports for the message `test` ",
+            "type": "string",
+            "example": "https://example.com/sms/delivery_report"
+          }
+        },
+        "required": [
+          "recipients", "sender_id"
+        ]
       },
       "OTPTokenRequest": {
         "type": "object",
@@ -262,22 +485,6 @@
             "description": "The OTP token to send to the recipient, if not specified, a new token will be generated",
             "type": "string",
             "example": "123456"
-          },
-          "channel": {
-            "description": "The channel to send the OTP token to the recipient",
-            "type": "string",
-            "example": "sms",
-            "enum": [
-              "sms",
-              "email",
-              "whatsapp"
-            ],
-            "default": "sms"
-          },
-          "channel_id": {
-            "description": "The channel ID to use for sending the OTP token",
-            "type": "string",
-            "example": "674535b2b39158b9aae90188fcec23eb"
           }
         },
         "required": [

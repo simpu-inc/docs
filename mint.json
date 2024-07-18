@@ -72,6 +72,18 @@
         "api-reference/otp/get",
         "api-reference/otp/get-by-recipient"
       ]
+    },
+    {
+      "group": "Texts",
+      "pages": [
+        "api-reference/sms/send"
+      ]
+    },
+    {
+      "group": "Mails",
+      "pages": [
+        "api-reference/mails/send"
+      ]
     }
   ],
   "footerSocials": {
