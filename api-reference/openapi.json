@@ -387,7 +387,7 @@
               "type": "array",
               "example": " "
           },
-          "aggregate_data": {
+          "aggregate_ref": {
               "description": "Aggregate of the Email message",
               "type": "string",
               "example": "674535b2b39158b9aae90188fcec23eb"
