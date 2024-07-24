@@ -353,18 +353,17 @@
           "id": {
               "description": "ID of the Email ",
               "type": "string",
-              "example": " "
+              "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "recipients": {
             "description": "Recipients of the Email",
-            "type": "string",
-            "example": "dev@simpu.co",
-            "minLength": 4
+            "type": "array",
+            "example": "dev@simpu.co"
           },
           "sender_id": {
               "description": "Sender ID of the Email",
               "type": "string",
-              "example": "info@simpu.co"
+              "example": "john@acme.com"
           },
 
           "external_ref": {
@@ -382,20 +381,10 @@
               "type": "string",
               "example": "674535b2b39158b9aae90188fcec23eb"
           },
-          "template_data": {
-              "description": "Template data of the Email message",
-              "type": "array",
-              "example": " "
-          },
-          "aggregate_ref": {
-              "description": "Aggregate of the Email message",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
-          },
           "from_name": {
               "description": "The sender of the email.",
               "type": "string",
-              "example": "Kola from Simpu"
+              "example": "John from Acme"
           },
           "personalisation": {
             "description": "Personalisation of the Email message",
@@ -539,25 +528,25 @@
         "type": "object",
         "properties": {
           "recipients": {
-            "description": "Recipients of the Email",
+            "description": "Recipients of the Email, comma-separated list of emails",
             "type": "string",
-            "example": "dev@simpu.co",
+            "example": "john@acme.com,mack@acme.com",
             "minLength": 4
           },
           "sender_id": {
               "description": "Sender ID of the Email",
               "type": "string",
-              "example": "info@simpu.co"
+              "example": "jane@acme.com"
           },
           "content": {
-              "description": "Content of the Email ",
+              "description": "Content of the Email , this is required if a template ID is not specified",
               "type": "string",
               "example": "Hello, this is just a test."
           },
           "from_name": {
               "description": "The name of the sender of the Email",
               "type": "string",
-              "example": "Kola from Simpu"
+              "example": "John from Acme"
           },
           "subject": {
               "description": "Subject of the Email",
@@ -567,12 +556,12 @@
           "reply_to": {
               "description": "The Email address a response should be sent to",
               "type": "string",
-              "example": "support@simpu.co"
+              "example": "no-reply@acme.com"
           },
-          "aggregate_ref": {
-              "description": "Aggregate of the Email",
+          "external_ref": {
+              "description": "This is a reference to the message in your system",
               "type": "string",
-              "example": "This is to reference a group of email "
+              "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "callback": {
               "description": "This is the URL to receive delivery reports for the email",
@@ -580,7 +569,7 @@
               "example": "https://example.com/email/delivery_report"
           },
           "template_id": {
-              "description": "Template ID of the Email",
+              "description": "Template ID of the Email, this is required if content is not specified",
               "type": "string",
               "example": "674535b2b39158b9aae90188fcec23eb"
           },
