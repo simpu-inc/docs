@@ -358,7 +358,7 @@
           "recipients": {
             "description": "Recipients of the Email",
             "type": "array",
-            "example": "dev@simpu.co"
+            "example": ["mack@acme.com"]
           },
           "sender_id": {
               "description": "Sender ID of the Email",
