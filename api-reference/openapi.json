@@ -365,7 +365,6 @@
               "type": "string",
               "example": "john@acme.com"
           },
-
           "external_ref": {
               "description": "This is a reference to the email in your system",
               "type": "string",
