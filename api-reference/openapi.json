@@ -59,7 +59,7 @@
     },
     "/email/send": {
       "post": {
-        "description": "Send an Email ",
+        "description": "Send an Email",
         "requestBody": {
           "description": "Email object",
           "content": {
@@ -78,6 +78,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Email"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lookup/phone": {
+      "post": {
+        "description": "Lookup a Phone",
+        "requestBody": {
+          "description": "Lookup phone object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupPhoneRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Lookup phone response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupPhone"
                 }
               }
             }
@@ -389,7 +427,7 @@
             "description": "Personalisation of the Email message",
             "type": "array",
             "items": {
-                "$ref": "#/components/schemas/Personalisation"
+                "$ref": "#/components/schemas/PersonalisationEmail"
             }
           },
           "created_datetime": {
@@ -399,6 +437,35 @@
           },
           "updated_datetime": {
             "description": "Date and time the Email  was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "LookupPhone": {
+        "required": [
+          "id",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+              "description": "ID of the phone",
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "phone": {
+            "description": "The phone number to be looked up",
+            "type": "string",
+            "example": "2348089672786"
+          },
+          "created_datetime": {
+            "description": "Date and time the phone lookup was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the phone lookup was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
           }
@@ -463,6 +530,27 @@
             "type": "object",
             "example": {
               "name": "John Doe"
+            }
+          }
+        }
+      },
+      "PersonalisationEmail": {
+        "required": [
+          "to",
+          "substitutions"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "description": "Recipient of the personalisation",
+            "type": "string",
+            "example": "mack@acme.com"
+          },
+          "substitutions": {
+            "description": "Substitutions of the personalisation",
+            "type": "object",
+            "example": {
+              "name": "Mack from Acme"
             }
           }
         }
@@ -576,8 +664,21 @@
             "description": "Personalisation of the Email ",
             "type": "array",
             "items": {
-                "$ref": "#/components/schemas/Personalisation"
+                "$ref": "#/components/schemas/PersonalisationEmail"
             }
+          }
+        }
+      },
+      "LookupPhoneRequest": {
+        "required": [
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "phone": {
+            "description": "The phone number to be looked up",
+            "type": "string",
+            "example": "2348089672786"
           }
         }
       },

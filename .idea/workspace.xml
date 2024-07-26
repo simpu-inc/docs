@@ -5,18 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="Email documentation">
+      <change afterPath="$PROJECT_DIR$/api-reference/lookup/lookup_phone.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-reference/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/openapi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-reference/otp/revoke.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/otp/revoke.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mint.json" beforeDir="false" afterPath="$PROJECT_DIR$/mint.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="email_docs" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,7 +108,7 @@
       <workItem from="1719580557830" duration="2005000" />
       <workItem from="1719582572562" duration="3401000" />
       <workItem from="1719592040175" duration="17984000" />
-      <workItem from="1721316408780" duration="24460000" />
+      <workItem from="1721316408780" duration="44938000" />
     </task>
     <task id="LOCAL-00001" summary="OTP documentation">
       <option name="closed" value="true" />
@@ -120,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721656519559</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Email documentation">
+      <option name="closed" value="true" />
+      <created>1721843187912</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721843187912</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
