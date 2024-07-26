@@ -76,7 +76,9 @@
     {
       "group": "Texts",
       "pages": [
-        "api-reference/sms/send"
+        "api-reference/sms/send",
+        "api-reference/lookup/phone"
+
       ]
     },
     {

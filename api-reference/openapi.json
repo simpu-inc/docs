@@ -59,7 +59,7 @@
     },
     "/email/send": {
       "post": {
-        "description": "Send an Email ",
+        "description": "Send an Email",
         "requestBody": {
           "description": "Email object",
           "content": {
@@ -78,6 +78,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Email"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lookup/phone": {
+      "post": {
+        "description": "Lookup a Phone",
+        "requestBody": {
+          "description": "Lookup phone object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupPhoneRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Lookup phone response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupPhone"
                 }
               }
             }
@@ -283,51 +321,53 @@
         "type": "object",
         "properties": {
           "id": {
-              "description": "ID of the SMS message",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "ID of the SMS message",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "recipients": {
             "description": "Recipients of the SMS message",
             "type": "array",
-            "example": ["2348023456789"]
+            "example": [
+              "2348023456789"
+            ]
           },
           "sender_id": {
-              "description": "Sender ID of the SMS message",
-              "type": "string",
-              "example": "Simpu",
-              "maxLength": 11
+            "description": "Sender ID of the SMS message",
+            "type": "string",
+            "example": "Simpu",
+            "maxLength": 11
           },
           "is_trackable": {
-              "description": "This determines if links in the message should be tracked",
-              "type": "boolean",
-              "example": false
+            "description": "This determines if links in the message should be tracked",
+            "type": "boolean",
+            "example": false
           },
           "content": {
-              "description": "Content of the SMS message",
-              "type": "string",
-              "example": "Hello! World. This is a test message."
+            "description": "Content of the SMS message",
+            "type": "string",
+            "example": "Hello! World. This is a test message."
           },
           "external_ref": {
-              "description": "This is a reference to the message in your system",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "This is a reference to the message in your system",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "callback": {
-              "description": "This is the URL to receive delivery reports for the message",
-              "type": "string",
-              "example": "https://example.com/sms/delivery_report"
+            "description": "This is the URL to receive delivery reports for the message",
+            "type": "string",
+            "example": "https://example.com/sms/delivery_report"
           },
           "template_id": {
-              "description": "Template ID of the SMS message",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "Template ID of the SMS message",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "personalisation": {
             "description": "Personalisation of the SMS message",
             "type": "array",
             "items": {
-                "$ref": "#/components/schemas/Personalisation"
+              "$ref": "#/components/schemas/Personalisation"
             }
           },
           "created_datetime": {
@@ -351,45 +391,47 @@
         "type": "object",
         "properties": {
           "id": {
-              "description": "ID of the Email ",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "ID of the Email ",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "recipients": {
             "description": "Recipients of the Email",
             "type": "array",
-            "example": ["mack@acme.com"]
+            "example": [
+              "mack@acme.com"
+            ]
           },
           "sender_id": {
-              "description": "Sender ID of the Email",
-              "type": "string",
-              "example": "john@acme.com"
+            "description": "Sender ID of the Email",
+            "type": "string",
+            "example": "john@acme.com"
           },
           "external_ref": {
-              "description": "This is a reference to the email in your system",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "This is a reference to the email in your system",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "callback": {
-              "description": "This is the URL to receive delivery reports for the message",
-              "type": "string",
-              "example": "https://example.com/email/delivery_report"
+            "description": "This is the URL to receive delivery reports for the message",
+            "type": "string",
+            "example": "https://example.com/email/delivery_report"
           },
           "template_id": {
-              "description": "Template ID of the Email message",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "Template ID of the Email message",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "from_name": {
-              "description": "The sender of the email.",
-              "type": "string",
-              "example": "John from Acme"
+            "description": "The sender of the email.",
+            "type": "string",
+            "example": "John from Acme"
           },
           "personalisation": {
             "description": "Personalisation of the Email message",
             "type": "array",
             "items": {
-                "$ref": "#/components/schemas/Personalisation"
+              "$ref": "#/components/schemas/PersonalisationEmail"
             }
           },
           "created_datetime": {
@@ -401,6 +443,39 @@
             "description": "Date and time the Email  was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "LookupPhone": {
+        "required": [
+          "msisdn"
+        ],
+        "type": "object",
+        "properties": {
+          "msisdn": {
+            "description": "The phone number looked up",
+            "type": "string",
+            "example": "2348089672786"
+          },
+          "operator": {
+            "description": "The carrier of the phone number",
+            "type": "string",
+            "example": "MTN"
+          },
+          "country": {
+            "description": "The country of the phone number",
+            "type": "string",
+            "example": "Nigeria"
+          },
+          "ported": {
+            "description": "The ported status of the phone number",
+            "type": "boolean",
+            "example": false
+          },
+          "dnd": {
+            "description": "The DND status of the phone number",
+            "type": "boolean",
+            "example": false
           }
         }
       },
@@ -467,6 +542,27 @@
           }
         }
       },
+      "PersonalisationEmail": {
+        "required": [
+          "to",
+          "substitutions"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "description": "Recipient of the personalisation",
+            "type": "string",
+            "example": "mack@acme.com"
+          },
+          "substitutions": {
+            "description": "Substitutions of the personalisation",
+            "type": "object",
+            "example": {
+              "name": "Mack from Acme"
+            }
+          }
+        }
+      },
       "SendSMSRequest": {
         "type": "object",
         "properties": {
@@ -516,7 +612,8 @@
           }
         },
         "required": [
-          "recipients", "sender_id"
+          "recipients",
+          "sender_id"
         ]
       },
       "EmailSendRequest": {
@@ -533,51 +630,64 @@
             "minLength": 4
           },
           "sender_id": {
-              "description": "Sender ID of the Email",
-              "type": "string",
-              "example": "jane@acme.com"
+            "description": "Sender ID of the Email",
+            "type": "string",
+            "example": "jane@acme.com"
           },
           "content": {
-              "description": "Content of the Email , this is required if a template ID is not specified",
-              "type": "string",
-              "example": "Hello, this is just a test."
+            "description": "Content of the Email , this is required if a template ID is not specified",
+            "type": "string",
+            "example": "Hello, this is just a test."
           },
           "from_name": {
-              "description": "The name of the sender of the Email",
-              "type": "string",
-              "example": "John from Acme"
+            "description": "The name of the sender of the Email",
+            "type": "string",
+            "example": "John from Acme"
           },
           "subject": {
-              "description": "Subject of the Email",
-              "type": "string",
-              "example": "This is a test!!!"
+            "description": "Subject of the Email",
+            "type": "string",
+            "example": "This is a test!!!"
           },
           "reply_to": {
-              "description": "The Email address a response should be sent to",
-              "type": "string",
-              "example": "no-reply@acme.com"
+            "description": "The Email address a response should be sent to",
+            "type": "string",
+            "example": "no-reply@acme.com"
           },
           "external_ref": {
-              "description": "This is a reference to the message in your system",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "This is a reference to the message in your system",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "callback": {
-              "description": "This is the URL to receive delivery reports for the email",
-              "type": "string",
-              "example": "https://example.com/email/delivery_report"
+            "description": "This is the URL to receive delivery reports for the email",
+            "type": "string",
+            "example": "https://example.com/email/delivery_report"
           },
           "template_id": {
-              "description": "Template ID of the Email, this is required if content is not specified",
-              "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+            "description": "Template ID of the Email, this is required if content is not specified",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
           },
           "personalisation": {
             "description": "Personalisation of the Email ",
             "type": "array",
             "items": {
-                "$ref": "#/components/schemas/Personalisation"
+              "$ref": "#/components/schemas/PersonalisationEmail"
             }
+          }
+        }
+      },
+      "LookupPhoneRequest": {
+        "required": [
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "phone": {
+            "description": "The phone number to be looked up",
+            "type": "string",
+            "example": "2348089672786"
           }
         }
       },
