@@ -1,0 +1,25 @@
+---
+title: Authentication
+description: '
+All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+'
+---
+
+
+```json
+"security": [
+  {
+    "bearerAuth": []
+  }
+]
+```
+### Base URL
+
+Simpu's API is built on REST principles and is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.
+
+The Base URL for all API endpoints is: https://simpu.co
+
+
+## Response Codes
+The API returns standard HTTP response codes to indicate the success or failure of an API request.
+Here are a few examples:
