@@ -379,6 +379,9 @@
             "description": "Date and time the SMS token was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaSMS"
           }
         }
       },
@@ -443,7 +446,10 @@
             "description": "Date and time the Email  was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
-          }
+          },
+            "meta": {
+              "$ref": "#/components/schemas/MetaEmail"
+            }
         }
       },
       "LookupPhone": {
@@ -518,6 +524,92 @@
             "description": "Date and time the OTP token was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "EstimateSMS": {
+        "required": ["available_balance", "charge", "encoding", "message_length", "pages"],
+        "type": "object",
+        "properties": {
+          "available_balance": {
+            "description": "Available balance for the request",
+            "type": "number",
+            "example": 1000.50
+          },
+          "charge": {
+            "description": "Charge for the request",
+            "type": "number",
+            "example": 3.00
+          },
+          "encoding": {
+            "description": "Encoding of the message",
+            "type": "string",
+            "enum": ["GSM", "UCS-2"],
+            "example": "UTF-8"
+          },
+          "message_length": {
+            "description": "Length of the message",
+            "type": "number",
+            "example": 160
+          },
+          "pages": {
+            "description": "Number of pages for the message",
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "EstimateEmail": {
+        "required": ["available_balance", "charge"],
+        "type": "object",
+        "properties": {
+          "available_balance": {
+            "description": "Available balance for the request",
+            "type": "number",
+            "example": 1000.50
+          },
+          "charge": {
+            "description": "Charge for the request",
+            "type": "number",
+            "example": 0.33
+          }
+        }
+      },
+      "MetaSMS": {
+        "required": ["method", "resource"],
+        "type": "object",
+        "properties": {
+          "method": {
+            "description": "The HTTP method used to make the request",
+            "type": "string",
+            "example": "POST"
+          },
+          "resource": {
+            "description": "The resource requested",
+            "type": "string",
+            "example": "/send/sms"
+          },
+          "estimate": {
+            "$ref": "#/components/schemas/EstimateSMS"
+          }
+        }
+      },
+      "MetaEmail": {
+        "required": ["method", "resource"],
+        "type": "object",
+        "properties": {
+          "method": {
+            "description": "The HTTP method used to make the request",
+            "type": "string",
+            "example": "POST"
+          },
+          "resource": {
+            "description": "The resource requested",
+            "type": "string",
+            "example": "/email/send"
+          },
+          "estimate": {
+            "$ref": "#/components/schemas/EstimateEmail"
           }
         }
       },
