@@ -18,13 +18,17 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:support.simpu.co"
+      "url": "https://support.simpu.co"
+    },
+    {
+      "name": "Texts",
+      "url": "https://texts.simpu.co"
+    },
+    {
+      "name": "Mails",
+      "url": "https://mails.simpu.co"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://support.simpu.co/portal/en/signin"
-  },
   "anchors": [
     {
       "name": "Help Center",

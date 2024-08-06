@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="General documentation">
-      <change afterPath="$PROJECT_DIR$/.idea/docs.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_07_2024,_09_21_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_07_2024__09_21__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="Documentation Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-reference/authentication.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/authentication.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-reference/introduction.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/introduction.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/hero-dark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/hero-dark.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/hero-light.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/hero-light.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/dark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/logo/dark.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/light.svg" beforeDir="false" afterPath="$PROJECT_DIR$/logo/light.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/introduction.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/introduction.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mint.json" beforeDir="false" afterPath="$PROJECT_DIR$/mint.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +42,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="documentation" />
+                    <option name="lastUsedInstant" value="1722601191" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="email_docs" />
                     <option name="lastUsedInstant" value="1721837633" />
@@ -89,7 +83,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;email__docs&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;documentation&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/lucyobahor/Desktop/docs&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -107,20 +101,27 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="SwaggerCodegen">
-      <option name="activeConfigurationType" value="FILE" />
-      <option name="configurationPath" value="" />
-      <option name="customJreEnabled" value="false" />
+    <configuration default="true" type="SwaggerCodegen" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allowRunningInParallel" value="false" />
       <option name="customTemplatesPath" value="" />
-      <option name="enableDebugLogging" value="false" />
+      <option name="envs">
+        <map />
+      </option>
       <option name="generateToPath" value="$PROJECT_DIR$/gen" />
       <option name="generationParameters">
         <list />
       </option>
-      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="generatorType" value="OPENAPI_GENERATOR_V6" />
       <option name="jdkPath" value="Default" />
       <option name="language" value="java" />
+      <option name="passParentEnvs" value="true" />
+      <option name="programParameters" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
       <option name="specificationPath" value="$PROJECT_DIR$/api-reference/openapi.json" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/api-reference" />
       <method v="2" />
     </configuration>
   </component>
@@ -143,6 +144,8 @@
       <workItem from="1719582572562" duration="3401000" />
       <workItem from="1719592040175" duration="17984000" />
       <workItem from="1721316408780" duration="44938000" />
+      <workItem from="1722601182653" duration="2245000" />
+      <workItem from="1722956765414" duration="1780000" />
     </task>
     <task id="LOCAL-00001" summary="OTP documentation">
       <option name="closed" value="true" />
@@ -176,15 +179,7 @@
       <option name="project" value="LOCAL" />
       <updated>1721843187912</updated>
     </task>
-    <task id="LOCAL-00005" summary="General documentation">
-      <option name="closed" value="true" />
-      <created>1722554344373</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1722554344373</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +199,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="OTP documentation" />
     <MESSAGE value="Email documentation" />
-    <MESSAGE value="General documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="General documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Email documentation" />
   </component>
 </project>
