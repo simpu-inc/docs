@@ -41,9 +41,6 @@
       "url": "https://www.simpu.co/blog"
     }
   ],
-  "seo": {
-  "indexHiddenPages": true
-},
 
   "navigation": [
     {
@@ -76,9 +73,15 @@
       "pages": [
         "api-reference/mails/send"
       ]
+    },
+    {
+      "group": "Airtime",
+      "pages": [
+        "api-reference/airtime/buy"
+
+      ]
     }
   ],
-  "feedback": { "thumbsRating": true, "suggestEdit": true },
 
   "footerSocials": {
     "x": "https://twitter.com/simpuinc",
