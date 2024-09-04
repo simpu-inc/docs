@@ -1,0 +1,33 @@
+---
+title: Data Model
+description: 'A quick overview to how Simpu data is structured'
+---
+
+## SMS
+There should be a description here ...
+
+<Accordion title="SMS Model">
+    <ResponseField name="id" type="string" required="true">
+        Unique ID of the SMS message
+    </ResponseField>
+    <ResponseField name="recipients" type="array" required="true">
+        Recipients of the SMS message
+    </ResponseField>
+    <ResponseField name="meta" type="Object" required="true">
+        <Expandable title="properties">
+            <ResponseField name="method" type="string" required="true">
+                The HTTP method used to make the request
+            </ResponseField>
+            <ResponseField name="resource" type="string" required="true">
+                The resource requested
+            </ResponseField>
+            <ResponseField name="estimate" type="Object" required="true">
+                <Expandable title="properties">
+                    <ResponseField name="available_balance" type="number" required="true">
+                        Available balance for the request
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+</Accordion>
