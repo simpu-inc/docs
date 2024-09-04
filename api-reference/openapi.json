@@ -321,7 +321,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "ID of the SMS message",
+            "description": "Unique ID of the SMS message",
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
           },
