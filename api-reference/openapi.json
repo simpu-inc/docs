@@ -516,7 +516,8 @@
           "status": {
             "description": "The status of the airtime ",
             "type": "string",
-            "example": "pending"
+            "example": "pending",
+            "enum": ["pending", "sent", "failed", "error", "success", "duplicate"]
           },
           "created_datetime": {
             "description": "Date and time the airtime was created",
@@ -526,7 +527,14 @@
           "network": {
             "description": "The network carrier of the airtime",
             "type": "string",
-            "example": "Airtel"
+            "example": "Airtel",
+            "enum": [
+              "Airtel",
+              "MTN",
+              "Glo",
+              "9mobile",
+              "NTEL"
+            ]
           },
           "meta": {
               "$ref": "#/components/schemas/MetaAirtime"
@@ -949,13 +957,19 @@
         "required": [
           "network",
           "amount",
-          "recipient",
-          "is_trackable"
+          "recipient"
         ],
         "properties": {
           "network": {
             "description": "The network carrier of the airtime",
             "type": "string",
+            "enum": [
+              "Airtel",
+              "MTN",
+              "Glo",
+              "9mobile",
+              "NTEL"
+            ],
             "example": "Airtel"
           },
           "amount": {
@@ -977,12 +991,6 @@
             "description": "This is a reference to the message in your system",
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
-          },
-          "is_trackable": {
-            "description": "This determines if links in the message should be tracked, links in the message will be replaced with trackable links",
-            "type": "boolean",
-            "default": false,
-            "example": false
           }
         }
       },
