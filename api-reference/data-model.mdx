@@ -2,9 +2,13 @@
 title: Data Model
 description: 'A quick overview to how Simpu data is structured'
 ---
+This page is a quick way to understand how Simpu works.
+Simpu datamodels consists of SMS, Email, OTP, Lookup and Airtime.
+
+
 
 ## SMS
-There should be a description here ...
+Boost growth with effective SMS campaigns. Stay connected with your customers at every stage of their journey by sending post-transaction, promotional, and personalized SMS messages.
 
 <Accordion title="SMS Model">
     <ResponseField name="id" type="string" required="true">
@@ -12,6 +16,40 @@ There should be a description here ...
     </ResponseField>
     <ResponseField name="recipients" type="array" required="true">
         Recipients of the SMS message
+    </ResponseField>
+    <ResponseField name="sender_id" type="string" required="true">
+        The Sender ID of the SMS message
+    </ResponseField>
+    <ResponseField name="is_trackable" type="boolean">
+        This determines if links in the message should be tracked
+    </ResponseField>
+    <ResponseField name="content" type="string">
+        The content of the SMS message
+    </ResponseField>
+    <ResponseField name="external_ref" type="string">
+        This is a reference to the message in your system
+    </ResponseField>
+    <ResponseField name="callback" type="string">
+        This is the URL to receive delivery reports for the message
+    </ResponseField>
+    <ResponseField name="template_id" type="string">
+        Template ID of the SMS message
+    </ResponseField>
+    <ResponseField name="personalisation" type="Object">
+        <Expandable title="properties">
+            <ResponseField name="to" type="string" required="true">
+                Recipient of the personalisation
+            </ResponseField>
+            <ResponseField name="substitutions" type="object" required="true">
+                Substitutions of the personalisation
+            </ResponseField>
+        </Expandable>
+     </ResponseField>
+    <ResponseField name="created_datetime" type="string">
+       Date and time the SMS was created
+    </ResponseField>
+    <ResponseField name="updated_datetime" type="string">
+       Date and time the SMS token was last updated, if any.
     </ResponseField>
     <ResponseField name="meta" type="Object" required="true">
         <Expandable title="properties">
@@ -26,8 +64,140 @@ There should be a description here ...
                     <ResponseField name="available_balance" type="number" required="true">
                         Available balance for the request
                     </ResponseField>
+                    <ResponseField name="charge" type="number" required="true">
+                        Charge for the request
+                    </ResponseField>
+                    <ResponseField name="encoding" type="string" required="true">
+                        Encoding of the message
+                    </ResponseField>
+                    <ResponseField name="message_length" type="number" required="true">
+                        Length of the message
+                    </ResponseField>
+                    <ResponseField name="pages" type="number" required="true">
+                        Number of pages for the message
+                    </ResponseField>
                 </Expandable>
             </ResponseField>
         </Expandable>
     </ResponseField>
 </Accordion>
+
+## Email
+
+Launch email campaigns that captivate your audience. Engage customers at the ideal moment with tailored messages. Increase your revenue by pinpointing and targeting the right customers.
+
+<Accordion title="Email Model">
+    <ResponseField name="id" type="string" required="true">
+        Unique ID of the email
+    </ResponseField>
+    <ResponseField name="recipients" type="array" required="true">
+        Recipients of the Email
+    </ResponseField>
+    <ResponseField name="sender_id" type="string" required="true">
+        The Sender ID of the Email
+    </ResponseField>
+    <ResponseField name="external_ref" type="string">
+        This is a reference to the email in your system
+    </ResponseField>
+    <ResponseField name="callback" type="string">
+        This is the URL to receive delivery reports for the message
+    </ResponseField>
+    <ResponseField name="template_id" type="string">
+        Template ID of the Email message
+    </ResponseField>
+     <ResponseField name="from_name" type="string">
+        The sender of the email
+    </ResponseField>
+    <ResponseField name="personalisation" type="Object">
+        <Expandable title="properties">
+            <ResponseField name="to" type="string" required="true">
+                Recipient of the personalisation
+            </ResponseField>
+            <ResponseField name="substitutions" type="object" required="true">
+                Substitutions of the personalisation
+            </ResponseField>
+        </Expandable>
+     </ResponseField>
+    <ResponseField name="created_datetime" type="string">
+       Date and time the SMS was created
+    </ResponseField>
+    <ResponseField name="updated_datetime" type="string">
+       Date and time the SMS token was last updated, if any.
+    </ResponseField>
+    <ResponseField name="meta" type="Object" required="true">
+        <Expandable title="properties">
+            <ResponseField name="method" type="string" required="true">
+                The HTTP method used to make the request
+            </ResponseField>
+            <ResponseField name="resource" type="string" required="true">
+                The resource requested
+            </ResponseField>
+            <ResponseField name="estimate" type="Object" required="true">
+                <Expandable title="properties">
+                    <ResponseField name="available_balance" type="number" required="true">
+                        Available balance for the request
+                    </ResponseField>
+                    <ResponseField name="charge" type="number" required="true">
+                        Charge for the request
+                    </ResponseField>
+                </Expandable>
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+</Accordion>
+
+## LookupPhone
+
+To look up a phone number on the system
+
+<Accordion title="LookupPhone Model">
+    <ResponseField name="msisdn" type="string" required="true">
+        The phone number looked up
+    </ResponseField>
+    <ResponseField name="operator" type="string">
+        The carrier of the phone number
+    </ResponseField>
+    <ResponseField name="country" type="string">
+        The country of the phone number
+    </ResponseField>
+    <ResponseField name="ported" type="boolean">
+        The ported status of the phone number
+    </ResponseField>
+    <ResponseField name="dnd" type="boolean">
+        The DND status of the phone number
+    </ResponseField>
+</Accordion>
+
+## OTP Model
+
+
+<Accordion title="OTP Model">
+    <ResponseField name="id" type="string" required="true">
+        Unique ID of the email
+    </ResponseField>
+    <ResponseField name="recipient" type="string" required="true">
+        Recipient of the OTP token
+    </ResponseField>
+    <ResponseField name="status" type="number" required="true">
+    "enum":SENT = 1 EXPIRED = 2 FAILED = 3 VERIFIED = 4 DELETED = 5
+        Status of the OTP token
+    </ResponseField>
+    <ResponseField name="status_desc" type="string" required="true">
+        Description of the status of the OTP token
+    </ResponseField>
+    <ResponseField name="created_datetime" type="string" required="true">
+        Date and time the OTP token was created
+    </ResponseField>
+    <ResponseField name="updated_datetime" type="string">
+        Date and time the OTP token was last updated, if any
+    </ResponseField>
+</Accordion>
+
+
+
+
+
+
+
+
+
