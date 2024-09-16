@@ -179,11 +179,12 @@ OTP (One-Time Password) Model is designed to manage the generation, validation, 
         Recipient of the OTP token
     </ResponseField>
     <ResponseField name="status" type="number" required="true">
-    "enum":SENT = 1 EXPIRED = 2 FAILED = 3 VERIFIED = 4 DELETED = 5
-        Status of the OTP token
+        Status of the OTP token. Possible values are:\
+        `1` - `5`
     </ResponseField>
     <ResponseField name="status_desc" type="string" required="true">
-        Description of the status of the OTP token
+        Description of the status of the OTP token. Possible values are:\
+        `SENT` `EXPIRED` `FAILED` `VERIFIED` `DELETED`
     </ResponseField>
     <ResponseField name="created_datetime" type="string" required="true">
         Date and time the OTP token was created
@@ -210,21 +211,15 @@ This  typically explains the structure and parameters involved in managing airti
         This is the URL to receive delivery reports for the message
     </ResponseField>
     <ResponseField name="status" type="string">
-    "enum": ["pending", "sent", "failed", "error", "success", "duplicate"]
-        Status of the Airtime
+        Status of the Airtime. Possible values are:\
+        `pending` `sent` `failed` `error` `success` `duplicate`
     </ResponseField>
      <ResponseField name="created_datetime" type="string">
         Date and time the Airtime  was created
     </ResponseField>
     <ResponseField name="network" type="string">
-    "enum": [
-              "Airtel",
-              "MTN",
-              "Glo",
-              "9mobile",
-              "NTEL"
-            ],
-        The network carrier of the airtime
+        The network carrier of the airtime. Possible values are:\
+        `Airtel` `MTN` `Glo` `9mobile` `NTEL`
     </ResponseField>
     <ResponseField name="meta" type="Object" required="true">
         <Expandable title="properties">
