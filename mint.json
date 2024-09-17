@@ -65,7 +65,8 @@
       "group": "Texts",
       "pages": [
         "api-reference/sms/send",
-        "api-reference/lookup/phone"
+        "api-reference/lookup/phone",
+        "api-reference/sms/smpp-error-codes"
 
       ]
     },
