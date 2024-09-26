@@ -315,13 +315,13 @@
         }
       }
     },
-    "/otp/get_by_recipient": {
+    "/otp/get-by-recipient": {
       "get": {
         "description": "Retrieve all OTPs based on the recipient supplied",
         "parameters": [
           {
             "name": "recipient",
-            "in": "path",
+            "in": "query",
             "description": "Recipient of OTPs to retrieve",
             "required": true,
             "schema": {
