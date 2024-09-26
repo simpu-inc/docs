@@ -1,23 +1,15 @@
 ---
 title: Authentication
-description: '
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-'
+description: "
+Simpu authenticates your API requests using your account's API keys. If a request doesn't include a valid key, Simpu returns an invalid request error. If a request includes a deleted or expired key, Simpu returns an authentication error.
+"
 ---
 
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
 ### Base URL
 
 Simpu's API is built on REST principles and is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.
 
-The Base URL for all API endpoints is: https://simpu.co
+The Base URL for all API endpoints is: https://api.v1.simpu.co
 
 
 ## Response Codes

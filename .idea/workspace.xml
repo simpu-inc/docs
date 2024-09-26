@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="Documentation Update" />
+    <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="Documentation Update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-reference/authentication.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/authentication.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-reference/sms/smpp-error-codes.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/sms/smpp-error-codes.mdx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
