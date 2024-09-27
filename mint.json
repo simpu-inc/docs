@@ -82,8 +82,16 @@
         "api-reference/airtime/buy"
 
       ]
+    },
+    {
+      "group": "Webhook",
+      "pages": [
+        "api-reference/webhook/introduction"
+
+      ]
     }
   ],
+
 
   "footerSocials": {
     "x": "https://twitter.com/simpuinc",
