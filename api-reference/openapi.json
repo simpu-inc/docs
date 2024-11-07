@@ -171,6 +171,48 @@
         }
       }
     },
+    "/lists/contact/rows": {
+      "get": {
+        "description": "Get rows of contact data from a specified list associated with the user's organization.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of rows to retrieve per page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+         "responses": {
+          "200": {
+            "description": "Successfully retrieved contact rows and table data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {"$ref": "#/components/schemas/Table" },
+                    {"$ref": "#/components/schemas/Rows" }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/otp/{id}": {
       "get": {
         "description": "Retrieve a single OTP based on the ID supplied",
@@ -571,6 +613,107 @@
             "description": "The DND status of the phone number",
             "type": "boolean",
             "example": false
+          }
+        }
+      },
+      "Rows": {
+        "required": [
+          "id",
+          "table_id",
+          "table_iid",
+          "columns"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the row ",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "table_id": {
+            "description": "ID of the table the row belongs to",
+            "type": "string",
+            "example": "2348023456789"
+          },
+          "table_iid": {
+            "description": "Internal ID for ordering rows within the table",
+            "type": "number",
+            "example": "001"
+          },
+          "columns": {
+            "description": "Data values for each column in the row",
+            "type": "object",
+            "example": {
+              "name": "name",
+              "email": "email address",
+              "type": "Text"
+            }
+          },
+          "created_datetime": {
+            "description": "Date and time the Row was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the Row was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "Table": {
+        "required": [
+          "id",
+          "name",
+          "type",
+          "columns",
+          "color",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the Table",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "name": {
+            "description": "Name of the table",
+            "type": "string",
+            "example": "2348023456789"
+          },
+          "type": {
+            "description": "Type of the table",
+            "type": "string",
+            "example": "CONTACT"
+          },
+          "columns": {
+            "description": "List of column names in the table",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["name", "email"]
+          },
+          "icon": {
+            "description": "Icon representing the table",
+            "type": "string",
+            "example": "contact_icon.pn"
+          },
+          "color": {
+            "description": "Color code associated with the table",
+            "type": "string",
+            "example": "#FF5733"
+          },
+          "created_datetime": {
+            "description": "Date and time the table was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the table was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
           }
         }
       },

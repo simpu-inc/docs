@@ -77,6 +77,12 @@
       ]
     },
     {
+      "group": "List",
+      "pages": [
+        "api-reference/list/rows"
+      ]
+    },
+    {
       "group": "Airtime",
       "pages": [
         "api-reference/airtime/buy"
