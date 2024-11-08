@@ -93,3 +93,4 @@ out/
 
 # macOS files
 .DS_Store
+.idea/*
