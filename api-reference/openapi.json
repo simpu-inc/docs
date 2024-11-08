@@ -192,10 +192,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {"$ref": "#/components/schemas/Table" },
-                    {"$ref": "#/components/schemas/Rows" }
-                  ]
+                  "type": "object",
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Rows"
+                      }
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                  }
                 }
               }
             }
@@ -619,8 +627,6 @@
       "Rows": {
         "required": [
           "id",
-          "table_id",
-          "table_iid",
           "columns"
         ],
         "type": "object",
@@ -629,16 +635,6 @@
             "description": "ID of the row ",
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
-          },
-          "table_id": {
-            "description": "ID of the table the row belongs to",
-            "type": "string",
-            "example": "2348023456789"
-          },
-          "table_iid": {
-            "description": "Internal ID for ordering rows within the table",
-            "type": "number",
-            "example": "001"
           },
           "columns": {
             "description": "Data values for each column in the row",
@@ -664,11 +660,7 @@
       "Table": {
         "required": [
           "id",
-          "name",
-          "type",
-          "columns",
-          "color",
-          "icon"
+          "columns"
         ],
         "type": "object",
         "properties": {
@@ -677,16 +669,6 @@
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
           },
-          "name": {
-            "description": "Name of the table",
-            "type": "string",
-            "example": "2348023456789"
-          },
-          "type": {
-            "description": "Type of the table",
-            "type": "string",
-            "example": "CONTACT"
-          },
           "columns": {
             "description": "List of column names in the table",
             "type": "array",
@@ -694,16 +676,6 @@
               "type": "string"
             },
             "example": ["name", "email"]
-          },
-          "icon": {
-            "description": "Icon representing the table",
-            "type": "string",
-            "example": "contact_icon.pn"
-          },
-          "color": {
-            "description": "Color code associated with the table",
-            "type": "string",
-            "example": "#FF5733"
           },
           "created_datetime": {
             "description": "Date and time the table was created",
