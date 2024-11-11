@@ -171,9 +171,9 @@
         }
       }
     },
-    "/lists/contact/rows": {
-      "get": {
-        "description": "Get rows of contact data from a specified list associated with the user's organization.",
+    "/lists/contact/rows/query": {
+      "post": {
+        "description": "Query contact rows",
         "parameters": [
           {
             "name": "limit",
@@ -184,11 +184,32 @@
               "type": "integer",
               "default": 100
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number for paginated results.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
           }
         ],
+        "requestBody": {
+          "description": "Query contact rows object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RowsQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
          "responses": {
           "200": {
-            "description": "Successfully retrieved contact rows and table data.",
+            "description": "Successful response containing table, row data, and metadata",
             "content": {
               "application/json": {
                 "schema": {
@@ -202,6 +223,9 @@
                     },
                     "table": {
                       "$ref": "#/components/schemas/Table"
+                    },
+                    "smartlist": {
+                      "$ref": "#/components/schemas/SmartList"
                     }
                   }
                 }
@@ -689,6 +713,29 @@
           }
         }
       },
+      "SmartList": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Smartlist ID ",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "created_datetime": {
+            "description": "Date and time the smartlist was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the smartlist was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
       "OTP": {
         "required": [
           "id",
@@ -1106,6 +1153,24 @@
             "description": "This is a reference to the message in your system",
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
+          }
+        }
+      },
+       "RowsQueryRequest": {
+        "type": "object",
+        "properties": {
+          "smartlist_id": {
+            "description": "ID of the SmartList to apply custom filters",
+            "type": "string",
+            "example": "1234"
+          },
+          "filters": {
+            "description": "List of filter criteria to apply to the query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [{"name":"status", "value":"Active"}]
           }
         }
       },
