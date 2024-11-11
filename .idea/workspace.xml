@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1c46d889-1474-4d8d-8aeb-b9a2cd16214e" name="Changes" comment="Documentation Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-reference/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/openapi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-reference/otp/get-by-recipient.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/otp/get-by-recipient.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-reference/webhook/introduction.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/api-reference/webhook/introduction.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
