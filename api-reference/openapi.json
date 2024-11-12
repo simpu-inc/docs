@@ -96,7 +96,7 @@
       }
     },
     "/lookup/phone": {
-      "post": {
+      "get": {
         "description": "Lookup a Phone",
         "requestBody": {
           "description": "Lookup phone object",
@@ -399,7 +399,7 @@
         }
       }
     },
-    "/otp/get_by_recipient": {
+    "/otp/get-by-recipient": {
       "get": {
         "description": "Retrieve all OTPs based on the recipient supplied",
         "parameters": [
