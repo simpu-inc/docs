@@ -96,19 +96,19 @@
       }
     },
     "/lookup/phone": {
-      "get": {
+      "post": {
         "description": "Lookup a Phone",
-        "parameters": [
-          {
-            "name": "phone",
-            "in": "query",
-            "description": "Phone number to lookup",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "description": "Lookup phone object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupPhoneRequest"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Lookup phone response",
@@ -159,6 +159,90 @@
             }
           },
           "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lists/contact/rows/query": {
+      "post": {
+        "description": "Query contact rows",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of rows to retrieve per page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number for paginated results.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "query_id",
+            "in": "query",
+            "description": "The scroll query ID for paginated results.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Query contact rows object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RowsQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response containing table, row data, and metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Rows"
+                      }
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    },
+                    "smartlist": {
+                      "$ref": "#/components/schemas/SmartList"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
             "description": "unexpected error",
             "content": {
               "application/json": {
@@ -259,7 +343,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OTPWithMeta"
+                  "$ref": "#/components/schemas/OTP"
                 }
               }
             }
@@ -315,13 +399,13 @@
         }
       }
     },
-    "/otp/get-by-recipient": {
+    "/otp/get_by_recipient": {
       "get": {
         "description": "Retrieve all OTPs based on the recipient supplied",
         "parameters": [
           {
             "name": "recipient",
-            "in": "query",
+            "in": "path",
             "description": "Recipient of OTPs to retrieve",
             "required": true,
             "schema": {
@@ -349,7 +433,7 @@
   },
   "components": {
     "schemas": {
-      "SMSModel": {
+      "SMS": {
         "required": [
           "id",
           "recipients",
@@ -417,100 +501,13 @@
             "description": "Date and time the SMS token was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaSMS"
           }
         }
       },
-      "OTPModel": {
-        "required": [
-          "id",
-          "recipient",
-          "status",
-          "status_desc",
-          "created_datetime"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "ID of the OTP token",
-            "type": "string",
-            "example": "674535b2b39158b9aae90188fcec23eb"
-          },
-          "recipient": {
-            "description": "Recipient of the OTP token",
-            "type": "string",
-            "example": "2348023456789"
-          },
-          "status": {
-            "description": "Status of the OTP token",
-            "type": "number",
-            "example": 1
-          },
-          "status_desc": {
-            "description": "Description of the status of the OTP token",
-            "type": "string",
-            "example": "SENT"
-          },
-          "created_datetime": {
-            "description": "Date and time the OTP token was created",
-            "type": "string",
-            "example": "2024-06-28T23:56:38.128604+00:00"
-          },
-          "expires_in": {
-            "description": "Time in minutes before the OTP token expires",
-            "type": "number",
-            "example": 15
-          },
-          "length": {
-            "description": "Length of the OTP token",
-            "type": "number",
-            "example": 4
-          },
-          "updated_datetime": {
-            "description": "Date and time the OTP token was last updated, if any",
-            "type": "string",
-            "example": "2024-06-28T23:56:38.128604+00:00"
-          },
-          "valid_until": {
-            "description": "Date and time the OTP token expires",
-            "type": "string",
-            "example": "2024-06-28T23:56:38.128604+00:00"
-          }
-        }
-      },
-      "LookupModel": {
-        "required": [
-          "msisdn"
-        ],
-        "type": "object",
-        "properties": {
-          "msisdn": {
-            "description": "The phone number looked up",
-            "type": "string",
-            "example": "2348089672786"
-          },
-          "operator": {
-            "description": "The carrier of the phone number",
-            "type": "string",
-            "example": "MTN"
-          },
-          "country": {
-            "description": "The country of the phone number",
-            "type": "string",
-            "example": "Nigeria"
-          },
-          "ported": {
-            "description": "The ported status of the phone number",
-            "type": "boolean",
-            "example": false
-          },
-          "dnd": {
-            "description": "The DND status of the phone number",
-            "type": "boolean",
-            "example": false
-          }
-        }
-      },
-      "EmailModel": {
+      "Email": {
         "required": [
           "id",
           "sender_id",
@@ -571,10 +568,13 @@
             "description": "Date and time the Email  was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaEmail"
           }
         }
       },
-      "AirtimeModel": {
+      "BuyAirtime": {
         "type": "object",
         "properties": {
           "id": {
@@ -586,11 +586,6 @@
             "description": "The recipient of the airtime",
             "type": "string",
             "example": "2348023456789"
-          },
-          "amount": {
-            "description": "The amount of airtime recharged",
-            "type": "number",
-            "example": "50"
           },
           "external_ref": {
             "description": "This is a reference to the airtime in your system",
@@ -631,51 +626,6 @@
               "9mobile",
               "NTEL"
             ]
-          }
-        }
-      },
-      "SMS": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "$ref": "#/components/schemas/SMSModel"
-              }
-            }
-          },
-          "meta": {
-            "$ref": "#/components/schemas/MetaSMS"
-          }
-        }
-      },
-      "Email": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "$ref": "#/components/schemas/EmailModel"
-              }
-            }
-          },
-          "meta": {
-            "$ref": "#/components/schemas/MetaEmail"
-          }
-        }
-      },
-      "BuyAirtime": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "airtime": {
-                "$ref": "#/components/schemas/AirtimeModel"
-              }
-            }
           },
           "meta": {
             "$ref": "#/components/schemas/MetaAirtime"
@@ -683,78 +633,199 @@
         }
       },
       "LookupPhone": {
+        "required": [
+          "msisdn"
+        ],
         "type": "object",
         "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "phone": {
-                "$ref": "#/components/schemas/LookupModel"
-              }
-            }
+          "msisdn": {
+            "description": "The phone number looked up",
+            "type": "string",
+            "example": "2348089672786"
+          },
+          "operator": {
+            "description": "The carrier of the phone number",
+            "type": "string",
+            "example": "MTN"
+          },
+          "country": {
+            "description": "The country of the phone number",
+            "type": "string",
+            "example": "Nigeria"
+          },
+          "ported": {
+            "description": "The ported status of the phone number",
+            "type": "boolean",
+            "example": false
+          },
+          "dnd": {
+            "description": "The DND status of the phone number",
+            "type": "boolean",
+            "example": false
           }
         }
       },
-      "OTPWithMeta": {
+      "Rows": {
+        "required": [
+          "id",
+          "columns"
+        ],
         "type": "object",
         "properties": {
-          "data": {
+          "id": {
+            "description": "ID of the row ",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "columns": {
+            "description": "Data values for each column in the row",
             "type": "object",
-            "properties": {
-              "otp": {
-                "$ref": "#/components/schemas/OTPModel"
-              }
+            "example": {
+              "name": "name",
+              "email": "email address",
+              "type": "Text"
             }
           },
-          "meta": {
-              "$ref": "#/components/schemas/MetaOTP"
+          "created_datetime": {
+            "description": "Date and time the Row was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the Row was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "RowsFilter": {
+        "type": "object",
+        "properties": {
+          "column_id": {
+            "type": "string",
+            "example": "fe9bafa8ae434a838a278aa7e710cded"
+          },
+          "name": {
+            "type": "string",
+            "example": "full_name"
+          },
+          "value": {
+            "type": "string",
+            "example": "John"
+          },
+          "operator": {
+            "type": "string",
+            "example": "contain",
+            "enum": [
+              "equal",
+              "not_equal",
+              "empty",
+              "not_empty",
+              "contain",
+              "not_contain",
+              "is_any",
+              "is_none_of"
+            ]
+          }
+        }
+      },
+      "Table": {
+        "required": [
+          "id",
+          "columns"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the Table",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "columns": {
+            "description": "List of column names in the table",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "name",
+              "email"
+            ]
+          },
+          "created_datetime": {
+            "description": "Date and time the table was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the table was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "SmartList": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Smartlist ID ",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "created_datetime": {
+            "description": "Date and time the smartlist was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the smartlist was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
           }
         }
       },
       "OTP": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "otp": {
-                "$ref": "#/components/schemas/OTPModel"
-              }
-            }
-          }
-        }
-      },
-      "EstimateOTP": {
         "required": [
-          "available_balance",
-          "charge",
-          "encoding"
+          "id",
+          "recipient",
+          "status",
+          "status_desc",
+          "created_datetime"
         ],
         "type": "object",
         "properties": {
-          "balance_before": {
-            "description": "Balance before the request",
-            "type": "number",
-            "example": 1003.50
-          },
-          "available_balance": {
-            "description": "Available balance for the request",
-            "type": "number",
-            "example": 1000.50
-          },
-          "charge": {
-            "description": "Charge for the request",
-            "type": "number",
-            "example": 3.00
-          },
-          "encoding": {
-            "description": "Encoding of the message",
+          "id": {
+            "description": "ID of the OTP token",
             "type": "string",
-            "enum": [
-              "GSM",
-              "UCS-2"
-            ],
-            "example": "GSM"
+            "example": "674535b2b39158b9aae90188fcec23eb"
+          },
+          "recipient": {
+            "description": "Recipient of the OTP token",
+            "type": "string",
+            "example": "2348023456789"
+          },
+          "status": {
+            "description": "Status of the OTP token",
+            "type": "number",
+            "example": 1
+          },
+          "status_desc": {
+            "description": "Description of the status of the OTP token",
+            "type": "string",
+            "example": "SENT"
+          },
+          "created_datetime": {
+            "description": "Date and time the OTP token was created",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
+          },
+          "updated_datetime": {
+            "description": "Date and time the OTP token was last updated, if any",
+            "type": "string",
+            "example": "2024-06-28T23:56:38.128604+00:00"
           }
         }
       },
@@ -768,11 +839,6 @@
         ],
         "type": "object",
         "properties": {
-          "balance_before": {
-            "description": "Balance before the request",
-            "type": "number",
-            "example": 1003.50
-          },
           "available_balance": {
             "description": "Available balance for the request",
             "type": "number",
@@ -842,28 +908,6 @@
           },
           "estimate": {
             "$ref": "#/components/schemas/EstimateSMS"
-          }
-        }
-      },
-      "MetaOTP": {
-        "required": [
-          "method",
-          "resource"
-        ],
-        "type": "object",
-        "properties": {
-          "method": {
-            "description": "The HTTP method used to make the request",
-            "type": "string",
-            "example": "POST"
-          },
-          "resource": {
-            "description": "The resource requested",
-            "type": "string",
-            "example": "/request/otp"
-          },
-          "estimate": {
-            "$ref": "#/components/schemas/EstimateOTP"
           }
         }
       },
@@ -1099,6 +1143,19 @@
           }
         }
       },
+      "LookupPhoneRequest": {
+        "required": [
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "phone": {
+            "description": "The phone number to be looked up",
+            "type": "string",
+            "example": "2348089672786"
+          }
+        }
+      },
       "OTPTokenRequest": {
         "type": "object",
         "properties": {
@@ -1154,10 +1211,9 @@
             "example": "Airtel"
           },
           "amount": {
-            "description": " The airtime amount to be recharged. Minimum amount is 50",
+            "description": " The airtime amount to be recharged",
             "type": "number",
-            "example": 1500,
-            "minimum": 50
+            "example": 1500
           },
           "recipient": {
             "description": "The recipient of the airtime",
@@ -1173,6 +1229,23 @@
             "description": "This is a reference to the message in your system",
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
+          }
+        }
+      },
+      "RowsQueryRequest": {
+        "type": "object",
+        "properties": {
+          "smartlist_id": {
+            "description": "ID of the SmartList to apply custom filters",
+            "type": "string",
+            "example": "1234"
+          },
+          "filters": {
+            "description": "List of filter criteria to apply to the query",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RowsFilter"
+            }
           }
         }
       },
@@ -1205,7 +1278,7 @@
           "status": {
             "type": "integer",
             "format": "int32",
-            "example": 400
+            "example": 200
           },
           "message": {
             "type": "string",
