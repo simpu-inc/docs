@@ -194,6 +194,16 @@
               "type": "integer",
               "default": 1
             }
+          },
+          {
+            "name": "query_id",
+            "in": "query",
+            "description": "The scroll query ID for paginated results.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
           }
         ],
         "requestBody": {
@@ -207,7 +217,7 @@
           },
           "required": true
         },
-         "responses": {
+        "responses": {
           "200": {
             "description": "Successful response containing table, row data, and metadata",
             "content": {
@@ -559,9 +569,9 @@
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
           },
-            "meta": {
-              "$ref": "#/components/schemas/MetaEmail"
-            }
+          "meta": {
+            "$ref": "#/components/schemas/MetaEmail"
+          }
         }
       },
       "BuyAirtime": {
@@ -582,7 +592,7 @@
             "type": "string",
             "example": "674535b2b39158b9aae90188fcec23eb"
           },
-           "callback": {
+          "callback": {
             "description": "This is the URL to receive delivery reports for the message",
             "type": "string",
             "example": "https://example.com/airtime/delivery_report"
@@ -591,7 +601,14 @@
             "description": "The status of the airtime ",
             "type": "string",
             "example": "pending",
-            "enum": ["pending", "sent", "failed", "error", "success", "duplicate"]
+            "enum": [
+              "pending",
+              "sent",
+              "failed",
+              "error",
+              "success",
+              "duplicate"
+            ]
           },
           "created_datetime": {
             "description": "Date and time the airtime was created",
@@ -611,11 +628,11 @@
             ]
           },
           "meta": {
-              "$ref": "#/components/schemas/MetaAirtime"
-            }
+            "$ref": "#/components/schemas/MetaAirtime"
+          }
         }
       },
-        "LookupPhone": {
+      "LookupPhone": {
         "required": [
           "msisdn"
         ],
@@ -681,6 +698,37 @@
           }
         }
       },
+      "RowsFilter": {
+        "type": "object",
+        "properties": {
+          "column_id": {
+            "type": "string",
+            "example": "fe9bafa8ae434a838a278aa7e710cded"
+          },
+          "name": {
+            "type": "string",
+            "example": "full_name"
+          },
+          "value": {
+            "type": "string",
+            "example": "John"
+          },
+          "operator": {
+            "type": "string",
+            "example": "contain",
+            "enum": [
+              "equal",
+              "not_equal",
+              "empty",
+              "not_empty",
+              "contain",
+              "not_contain",
+              "is_any",
+              "is_none_of"
+            ]
+          }
+        }
+      },
       "Table": {
         "required": [
           "id",
@@ -699,7 +747,10 @@
             "items": {
               "type": "string"
             },
-            "example": ["name", "email"]
+            "example": [
+              "name",
+              "email"
+            ]
           },
           "created_datetime": {
             "description": "Date and time the table was created",
@@ -779,7 +830,13 @@
         }
       },
       "EstimateSMS": {
-        "required": ["available_balance", "charge", "encoding", "message_length", "pages"],
+        "required": [
+          "available_balance",
+          "charge",
+          "encoding",
+          "message_length",
+          "pages"
+        ],
         "type": "object",
         "properties": {
           "available_balance": {
@@ -795,7 +852,10 @@
           "encoding": {
             "description": "Encoding of the message",
             "type": "string",
-            "enum": ["GSM", "UCS-2"],
+            "enum": [
+              "GSM",
+              "UCS-2"
+            ],
             "example": "UTF-8"
           },
           "message_length": {
@@ -811,7 +871,10 @@
         }
       },
       "EstimateEmail": {
-        "required": ["available_balance", "charge"],
+        "required": [
+          "available_balance",
+          "charge"
+        ],
         "type": "object",
         "properties": {
           "available_balance": {
@@ -827,7 +890,10 @@
         }
       },
       "MetaSMS": {
-        "required": ["method", "resource"],
+        "required": [
+          "method",
+          "resource"
+        ],
         "type": "object",
         "properties": {
           "method": {
@@ -846,7 +912,10 @@
         }
       },
       "MetaEmail": {
-        "required": ["method", "resource"],
+        "required": [
+          "method",
+          "resource"
+        ],
         "type": "object",
         "properties": {
           "method": {
@@ -865,33 +934,41 @@
         }
       },
       "ChargeAirtime": {
-         "required": ["amount", "available_balance", "balance_before", "refunded"],
+        "required": [
+          "amount",
+          "available_balance",
+          "balance_before",
+          "refunded"
+        ],
         "type": "object",
         "properties": {
-        "amount": {
-              "description": "Amount of the airtime to be recharged",
-              "type": "number",
-              "example": 1500
-        },
+          "amount": {
+            "description": "Amount of the airtime to be recharged",
+            "type": "number",
+            "example": 1500
+          },
           "available_balance": {
-          "description": "Available balance of the recipient",
-          "type": "number",
-          "example": 2000
-        },
-        "balance_before": {
-          "description": "Balance before recharge",
-          "type": "number",
-          "example": 500
-        },
-        "refunded": {
-          "description": "Airtime refund",
-          "type": "boolean",
-          "example": false
+            "description": "Available balance of the recipient",
+            "type": "number",
+            "example": 2000
+          },
+          "balance_before": {
+            "description": "Balance before recharge",
+            "type": "number",
+            "example": 500
+          },
+          "refunded": {
+            "description": "Airtime refund",
+            "type": "boolean",
+            "example": false
+          }
         }
-  }
-},
+      },
       "MetaAirtime": {
-        "required": ["method", "resource"],
+        "required": [
+          "method",
+          "resource"
+        ],
         "type": "object",
         "properties": {
           "method": {
@@ -909,7 +986,6 @@
           }
         }
       },
-
       "Personalisation": {
         "required": [
           "to",
@@ -1156,7 +1232,7 @@
           }
         }
       },
-       "RowsQueryRequest": {
+      "RowsQueryRequest": {
         "type": "object",
         "properties": {
           "smartlist_id": {
@@ -1168,9 +1244,8 @@
             "description": "List of filter criteria to apply to the query",
             "type": "array",
             "items": {
-              "type": "string"
-            },
-            "example": [{"name":"status", "value":"Active"}]
+              "$ref": "#/components/schemas/RowsFilter"
+            }
           }
         }
       },
