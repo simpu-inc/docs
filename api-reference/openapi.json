@@ -236,6 +236,9 @@
                     },
                     "smartlist": {
                       "$ref": "#/components/schemas/SmartList"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/MetaQueryRows"
                     }
                   }
                 }
@@ -1032,6 +1035,77 @@
           },
           "charge": {
             "$ref": "#/components/schemas/ChargeAirtime"
+          }
+        }
+      },
+      "QueryRows": {
+        "required": [
+          "next_page",
+          "per_page",
+          "count_total",
+          "page_total",
+          "page",
+          "prev_page",
+          "query_id"
+        ],
+        "type": "object",
+        "properties": {
+          "next_page": {
+            "description": "Indicates if there is a subsequent page",
+            "type": "boolean",
+            "example": "True"
+          },
+          "per_page": {
+            "description": " Specifies the number of items displayed per page in the current query",
+            "type": "number",
+            "example": 7
+          },
+          "count_total": {
+            "description": "The total count of all items available across all pages for the current query",
+            "type": "number",
+            "example": 50
+          },
+          "page_total": {
+            "description": "The total number of pages available based on the per_page setting and the total item count",
+            "type": "number",
+            "example": 100
+          },
+          "page": {
+            "description": "The current page number for the query or response",
+            "type": "number",
+            "example": 9
+          },
+          "prev_page": {
+            "description": "Indicates if there is a previous page available; true if a prior page exists",
+            "type": "boolean",
+            "example": "True"
+          },
+          "query_id": {
+            "description": "A unique identifier for the current query, which may correspond to the last row ID",
+            "type": "string",
+            "example": "1234"
+          }
+        }
+      },
+      "MetaQueryRows": {
+        "required": [
+          "method",
+          "resource"
+        ],
+        "type": "object",
+        "properties": {
+          "method": {
+            "description": "The HTTP method used to make the request",
+            "type": "string",
+            "example": "POST"
+          },
+          "resource": {
+            "description": "The resource requested",
+            "type": "string",
+            "example": "/lists/contact/rows/query"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/QueryRows"
           }
         }
       },
