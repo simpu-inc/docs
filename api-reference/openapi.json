@@ -255,6 +255,55 @@
         }
       }
     },
+       "/lists/contact/rows": {
+      "post": {
+        "description": "Create a new contact row",
+        "requestBody": {
+          "description": "This creates and saves a new row in the specified contact table",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Row created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Rows"
+                      }
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/otp/{id}": {
       "get": {
         "description": "Retrieve a single OTP based on the ID supplied",
@@ -1245,6 +1294,20 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RowsFilter"
+            }
+          }
+        }
+      },
+      "CreateRowRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Data values for each column in the row",
+            "type": "object",
+            "example": {
+              "name": "name",
+              "email": "email address",
+              "type": "Text"
             }
           }
         }
