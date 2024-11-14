@@ -228,7 +228,7 @@
                     "rows": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Rows"
+                        "$ref": "#/components/schemas/Row"
                       }
                     },
                     "table": {
@@ -262,7 +262,7 @@
       "post": {
         "description": "Create a new contact row",
         "requestBody": {
-          "description": "This creates and saves a new row in the specified contact table",
+          "description": "This creates a new row in the specified contact table",
           "content": {
             "application/json": {
               "schema": {
@@ -280,11 +280,8 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Rows"
-                      }
+                    "row": {
+                      "$ref": "#/components/schemas/Row"
                     },
                     "table": {
                       "$ref": "#/components/schemas/Table"
@@ -717,7 +714,7 @@
           }
         }
       },
-      "Rows": {
+      "Row": {
         "required": [
           "id",
           "columns"
@@ -1038,7 +1035,7 @@
           }
         }
       },
-      "QueryRows": {
+      "Pagination": {
         "required": [
           "next_page",
           "per_page",
@@ -1105,7 +1102,7 @@
             "example": "/lists/contact/rows/query"
           },
           "pagination": {
-            "$ref": "#/components/schemas/QueryRows"
+            "$ref": "#/components/schemas/Pagination"
           }
         }
       },
