@@ -228,7 +228,7 @@
                     "rows": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Rows"
+                        "$ref": "#/components/schemas/Row"
                       }
                     },
                     "table": {
@@ -236,6 +236,9 @@
                     },
                     "smartlist": {
                       "$ref": "#/components/schemas/SmartList"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/MetaQueryRows"
                     }
                   }
                 }
@@ -243,6 +246,52 @@
             }
           },
           "404": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lists/contact/rows": {
+      "post": {
+        "description": "Create a new contact row",
+        "requestBody": {
+          "description": "This creates a new row in the specified contact table",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Row created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "row": {
+                      "$ref": "#/components/schemas/Row"
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
             "description": "unexpected error",
             "content": {
               "application/json": {
@@ -665,7 +714,7 @@
           }
         }
       },
-      "Rows": {
+      "Row": {
         "required": [
           "id",
           "columns"
@@ -681,9 +730,9 @@
             "description": "Data values for each column in the row",
             "type": "object",
             "example": {
-              "name": "name",
-              "email": "email address",
-              "type": "Text"
+              "674535b2b39158b9aae90188fcec23ec": "John Doe",
+              "674535b2b39158b9aae90188fcec23ed": "john@acme.org",
+              "674535b2b39158b9aae90188fcec23ee": "9291234567"
             }
           },
           "created_datetime": {
@@ -745,11 +794,24 @@
             "description": "List of column names in the table",
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/TableColumn"
             },
             "example": [
-              "name",
-              "email"
+              {
+                "id": "674535b2b39158b9aae90188fcec23ec",
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "id": "674535b2b39158b9aae90188fcec23ed",
+                "name": "Email",
+                "type": "EMAIL"
+              },
+              {
+                "id": "674535b2b39158b9aae90188fcec23ee",
+                "name": "Mobile",
+                "type": "PHONE NUMBER"
+              }
             ]
           },
           "created_datetime": {
@@ -761,6 +823,41 @@
             "description": "Date and time the table was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "TableColumn": {
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the column",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23ec"
+          },
+          "name": {
+            "description": "Name of the column",
+            "type": "string",
+            "example": "name"
+          },
+          "type": {
+            "description": "Type of the column",
+            "type": "string",
+            "example": "TEXT",
+            "enum": [
+              "TEXT",
+              "NUMBER",
+              "DATE",
+              "PHONE NUMBER",
+              "EMAIL",
+              "URL",
+              "SELECT",
+              "MULTI SELECT"
+            ]
           }
         }
       },
@@ -983,6 +1080,77 @@
           },
           "charge": {
             "$ref": "#/components/schemas/ChargeAirtime"
+          }
+        }
+      },
+      "Pagination": {
+        "required": [
+          "next_page",
+          "per_page",
+          "count_total",
+          "page_total",
+          "page",
+          "prev_page",
+          "query_id"
+        ],
+        "type": "object",
+        "properties": {
+          "next_page": {
+            "description": "Indicates if there is a subsequent page",
+            "type": "boolean",
+            "example": "True"
+          },
+          "per_page": {
+            "description": " Specifies the number of items displayed per page in the current query",
+            "type": "number",
+            "example": 7
+          },
+          "count_total": {
+            "description": "The total count of all items available across all pages for the current query",
+            "type": "number",
+            "example": 50
+          },
+          "page_total": {
+            "description": "The total number of pages available based on the per_page setting and the total item count",
+            "type": "number",
+            "example": 100
+          },
+          "page": {
+            "description": "The current page number for the query or response",
+            "type": "number",
+            "example": 9
+          },
+          "prev_page": {
+            "description": "Indicates if there is a previous page available; true if a prior page exists",
+            "type": "boolean",
+            "example": "True"
+          },
+          "query_id": {
+            "description": "A unique identifier for the current query, which may correspond to the last row ID",
+            "type": "string",
+            "example": "1234"
+          }
+        }
+      },
+      "MetaQueryRows": {
+        "required": [
+          "method",
+          "resource"
+        ],
+        "type": "object",
+        "properties": {
+          "method": {
+            "description": "The HTTP method used to make the request",
+            "type": "string",
+            "example": "POST"
+          },
+          "resource": {
+            "description": "The resource requested",
+            "type": "string",
+            "example": "/lists/contact/rows/query"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
           }
         }
       },
@@ -1245,6 +1413,20 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RowsFilter"
+            }
+          }
+        }
+      },
+      "CreateRowRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Data values for each column in the row",
+            "type": "object",
+            "example": {
+              "name": "name",
+              "email": "email address",
+              "type": "Text"
             }
           }
         }

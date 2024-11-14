@@ -79,7 +79,8 @@
     {
       "group": "List",
       "pages": [
-        "api-reference/list/rows"
+        "api-reference/lists/query_rows",
+        "api-reference/lists/create_row"
       ]
     },
     {
