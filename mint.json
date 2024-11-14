@@ -80,7 +80,7 @@
       "group": "List",
       "pages": [
         "api-reference/lists/query_rows",
-        "api-reference/lists/save"
+        "api-reference/lists/create_row"
       ]
     },
     {

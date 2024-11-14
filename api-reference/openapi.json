@@ -258,7 +258,7 @@
         }
       }
     },
-       "/lists/contact/rows": {
+    "/lists/contact/rows": {
       "post": {
         "description": "Create a new contact row",
         "requestBody": {
@@ -794,11 +794,24 @@
             "description": "List of column names in the table",
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/TableColumn"
             },
             "example": [
-              "name",
-              "email"
+              {
+                "id": "674535b2b39158b9aae90188fcec23ec",
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "id": "674535b2b39158b9aae90188fcec23ed",
+                "name": "Email",
+                "type": "EMAIL"
+              },
+              {
+                "id": "674535b2b39158b9aae90188fcec23ee",
+                "name": "Mobile",
+                "type": "PHONE NUMBER"
+              }
             ]
           },
           "created_datetime": {
@@ -810,6 +823,41 @@
             "description": "Date and time the table was last updated, if any",
             "type": "string",
             "example": "2024-06-28T23:56:38.128604+00:00"
+          }
+        }
+      },
+      "TableColumn": {
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID of the column",
+            "type": "string",
+            "example": "674535b2b39158b9aae90188fcec23ec"
+          },
+          "name": {
+            "description": "Name of the column",
+            "type": "string",
+            "example": "name"
+          },
+          "type": {
+            "description": "Type of the column",
+            "type": "string",
+            "example": "TEXT",
+            "enum": [
+              "TEXT",
+              "NUMBER",
+              "DATE",
+              "PHONE NUMBER",
+              "EMAIL",
+              "URL",
+              "SELECT",
+              "MULTI SELECT"
+            ]
           }
         }
       },
