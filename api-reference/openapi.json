@@ -305,7 +305,7 @@
       }
     },
     "/lists/contact/rows/<row_id>": {
-      "post": {
+      "patch": {
         "description": "Update a row in a contact table",
         "parameters": [
           {
