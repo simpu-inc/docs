@@ -315,7 +315,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "674535b2b39158b9aae90188fcec23eb"
+              "example": "674535b2b39158b9aae90188fcec23ec"
             }
           }
         ],
