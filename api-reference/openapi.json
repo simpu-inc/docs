@@ -304,6 +304,64 @@
         }
       }
     },
+    "/lists/contact/rows/<row_id>": {
+      "patch": {
+        "description": "Update a row in a contact table",
+        "parameters": [
+          {
+            "name": "row_id",
+            "in": "path",
+            "description": "The unique ID of the row to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23eb"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updates the column of a specified row in the contact table",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the row",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "row": {
+                      "$ref": "#/components/schemas/Row"
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/otp/{id}": {
       "get": {
         "description": "Retrieve a single OTP based on the ID supplied",
@@ -1422,6 +1480,20 @@
         "properties": {
           "columns": {
             "description": "Data values for each column in the row",
+            "type": "object",
+            "example": {
+              "674535b2b39158b9aae90188fcec23ec": "John Doe",
+              "674535b2b39158b9aae90188fcec23ed": "john@acme.org",
+              "674535b2b39158b9aae90188fcec23ee": "9291234567"
+            }
+          }
+        }
+      },
+      "UpdateRowRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "The data values with column IDs as keys and their corresponding updated data as values.",
             "type": "object",
             "example": {
               "674535b2b39158b9aae90188fcec23ec": "John Doe",
