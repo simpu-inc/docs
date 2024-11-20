@@ -362,6 +362,53 @@
         }
       }
     },
+    "/lists/contact/row/<row_id>": {
+      "get": {
+        "description": "Get a specific row in a contact table",
+        "parameters": [
+          {
+            "name": "row_id",
+            "in": "path",
+            "description": "The  ID of the row to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23ed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the row",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "row": {
+                      "$ref": "#/components/schemas/Row"
+                    },
+                    "table": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/otp/{id}": {
       "get": {
         "description": "Retrieve a single OTP based on the ID supplied",
