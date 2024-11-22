@@ -81,7 +81,8 @@
       "pages": [
         "api-reference/lists/query_rows",
         "api-reference/lists/create_row",
-        "api-reference/lists/update_row"
+        "api-reference/lists/update_row",
+        "api-reference/lists/get_row"
       ]
     },
     {
