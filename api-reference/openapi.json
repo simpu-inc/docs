@@ -360,7 +360,38 @@
             }
           }
         }
+      },
+     "delete": {
+       "description": "Delete a specific row from the contact table",
+      "parameters": [
+          {
+            "name": "row_id",
+            "in": "path",
+            "description": "The unique ID of the row to delete",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "674535b2b39158b9aae90188fcec23ec"
+            }
+          }
+        ],
+      "responses": {
+        "204": {
+          "description": "Row deleted successfully. No content is returned.",
+          "content": {}
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        }
       }
+    }
     },
     "/lists/contact/row/<row_id>": {
       "get": {
