@@ -421,12 +421,44 @@
                     },
                     "table": {
                       "$ref": "#/components/schemas/Table"
+                    },
+                    "example": {
+
                     }
                   }
                 }
               }
             }
           },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+      "/lists/contact": {
+      "get": {
+        "description": "Gets the contact list for the organisation.If no contact table exists, it creates a default template table.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the contact table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                      "$ref": "#/components/schemas/Table"
+                    }
+                }
+             }
+          },
+
           "400": {
             "description": "unexpected error",
             "content": {
