@@ -421,9 +421,6 @@
                     },
                     "table": {
                       "$ref": "#/components/schemas/Table"
-                    },
-                    "example": {
-
                     }
                   }
                 }
