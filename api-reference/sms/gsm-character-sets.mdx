@@ -114,6 +114,51 @@ These characters are supported but each counts as two characters against your li
 - Fewer characters per message
 - May require more segments for same content
 
+## Cost Impact Analysis
+
+### Message Splitting Examples
+1. **Standard Message (GSM-7)**:
+Welcome to our store! Get 20% off your purchase today. Valid until December 31.
+(71 characters = 1 SMS)
+
+2. **Message with Special Characters (UCS-2)**:
+✨ Welcome to our store! Get 20% off your purchase today! ⭐
+(71 characters = 2 SMS)
+
+### Character Replacement Guide
+
+| Special Character | GSM Alternative | Impact |
+|------------------|-----------------|---------|
+| ✨ (sparkle)     | * (asterisk)    | Saves 1 SMS |
+| – (en dash)      | - (hyphen)      | Maintains GSM |
+| " (smart quote)  | " (straight quote) | Maintains GSM |
+| • (bullet)       | * (asterisk)    | Maintains GSM |
+| … (ellipsis)     | ... (periods)   | Maintains GSM |
+
+## Best Practices for Cost-Effective SMS Marketing
+
+### Message Planning
+1. Draft in plain text first
+2. Calculate character count before adding special characters
+3. Consider message priority vs. cost
+4. Plan split points for longer messages
+
+### Marketing Considerations
+1. **A/B Testing**
+- Test engagement with/without special characters
+- Monitor ROI for decorated messages
+- Track click-through rates
+
+2. **Brand Voice**
+- Balance professionalism with personality
+- Maintain consistency across campaigns
+- Consider target audience preferences
+
+3. **Strategic Use of Special Characters**
+- Use emojis to emphasize key points
+- Place special characters at natural breaks
+- Limit to one or two per message
+
 ## Testing and Verification
 
 ### Before Sending
@@ -129,3 +174,6 @@ These characters are supported but each counts as two characters against your li
 3. Track segmentation
 4. Analyze cost efficiency
 5. Gather recipient feedback
+
+## Conclusion
+While special characters can enhance message engagement, their impact on costs requires careful consideration. Balance creativity with cost-effectiveness by using special characters strategically and monitoring their impact on campaign performance.
