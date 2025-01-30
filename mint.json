@@ -66,7 +66,8 @@
       "pages": [
         "api-reference/sms/send",
         "api-reference/lookup/phone",
-        "api-reference/sms/smpp-error-codes"
+        "api-reference/sms/smpp-error-codes",
+        "api-reference/sms/gsm-character-sets"
 
       ]
     },

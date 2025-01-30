@@ -1,0 +1,131 @@
+---
+title: 'Complete Guide to SMS Character Sets (GSM)'
+description: 'List of final status codes for SMS messages'
+---
+
+# Complete Guide to SMS Character Sets (GSM)
+
+## Overview
+An SMS message can contain up to 160 characters when using the standard GSM (Global System for Mobile Communications) character set. When you use characters outside this set, your message automatically converts to Unicode format, which reduces the character limit to 70 characters and may result in higher messaging costs.
+
+## Character Encoding & Message Limits
+
+### Standard GSM Messages
+- Single message: 160 characters
+- Multi-part message segments: 153 characters each
+- Uses 7-bit encoding
+- Most cost-effective option
+- Widely supported across all devices
+
+### Unicode Messages
+- Single message: 70 characters
+- Multi-part message segments: 67 characters each
+- Uses 16-bit encoding
+- Higher cost per message
+- Required for non-GSM characters, emojis, and special symbols
+
+## Character Usage Guide
+
+### Common Problematic Characters
+Below are frequently used characters that should be replaced with their GSM-compliant alternatives:
+
+| Character to Avoid | GSM Alternative | Notes |
+|-------------------|-----------------|--------|
+| ' (curved quote)  | ' (straight quote) | Word processors often auto-convert these |
+| " (curved quotes) | " (straight quotes) | Both opening and closing quotes need changing |
+| – (en dash)       | - (hyphen) | Common in copied web content |
+| — (em dash)       | - (hyphen) | Often used in formal writing |
+| … (ellipsis)      | ... (three periods) | Counts as one character when using periods |
+| • (bullet)        | * (asterisk) | Common in formatted lists |
+| ` (backtick)      | ' (straight quote) | Often used in technical writing |
+| " (smart quotes)  | " (straight quotes) | Auto-converted by word processors |
+| ~ (tilde)         | - (hyphen) | Common in technical content |
+| ¬ (not sign)      | - (hyphen) | Rare but problematic |
+
+### Standard GSM Character Set (7-bit)
+
+#### Letters
+- Uppercase: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+- Lowercase: a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+#### Numbers
+0 1 2 3 4 5 6 7 8 9
+
+#### Basic Punctuation
+. , ; : ? ! " ' ( ) / - _
+
+#### Symbols
+@ # $ % & * + = < > £ § ¥
+
+#### Special Characters
+- Greek Letters: Δ Φ Γ Λ Ω Π Ψ Σ Θ Ξ
+- Accented Characters: é è ø ñ Ñ ü ä ö Ü Ö Å å É æ Æ ß Ç
+- Space and Control: [space] [newline] [carriage return]
+
+### Extended GSM Characters (Counts as 2 Characters)
+These characters are supported but each counts as two characters against your limit: { } [ ] ~ ^ € \ |
+
+## Best Practices for SMS Composition
+
+### Message Planning
+1. Draft your message in a plain text editor to avoid automatic character conversion
+2. Calculate character count before sending
+3. Include space for any personalization variables
+4. Consider message splitting points for longer content
+
+### Technical Considerations
+1. Test messages on multiple device types
+2. Use an SMS testing tool to verify character encoding
+3. Check character count using a GSM-specific calculator
+4. Verify support for special characters in target regions
+
+### Content Optimization
+1. Use abbreviated forms when appropriate
+2. Remove unnecessary punctuation
+3. Simplify formatting
+4. Use standard GSM characters whenever possible
+
+## Common Pitfalls to Avoid
+
+### Formatting Issues
+- Copying from word processors without cleaning text
+- Using rich text formatting
+- Relying on special characters for emphasis
+
+### Technical Mistakes
+- Assuming all special characters count the same
+- Not accounting for message concatenation
+- Ignoring character encoding in different regions
+
+### Content Problems
+- Using emojis without understanding their impact
+- Including URLs with special characters
+- Not considering message splitting in natural break points
+
+## Impact on Message Costs
+
+### GSM Messages
+- Standard rate applies
+- More characters per message
+- Better value for longer content
+
+### Unicode Messages
+- Higher rate may apply
+- Fewer characters per message
+- May require more segments for same content
+
+## Testing and Verification
+
+### Before Sending
+1. Use a GSM character checker tool
+2. Verify message length
+3. Test on multiple devices
+4. Check cost calculations
+5. Verify delivery format
+
+### After Sending
+1. Monitor delivery rates
+2. Check message appearance
+3. Track segmentation
+4. Analyze cost efficiency
+5. Gather recipient feedback
