@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Simpu",
-  "theme": "maple",
+  "theme": "mint",
   "description": "Simpu is a unified customer engagement platform that helps businesses manage customer interactions across multiple channels, including SMS, email, and more.",
   "logo": {
     "dark": "/logo/dark.svg",
@@ -17,27 +17,31 @@
     "light": "#0082F3",
     "dark": "#026AE8"
   },
+  "appearance": {
+    "default": "system",
+    "strict": true
+  },
   "navbar": {
     "links": [
       {
-        "label": "Texts App",
-        "href": "https://texts.simpu.co/",
-        "icon": "message-square"
+        "label": "Texts",
+        "href": "https://texts.simpu.co/"
       },
       {
-        "label": "Mails App",
-        "href": "https://mails.simpu.co/",
-        "icon": "mail"
+        "label": "Mails",
+        "href": "https://mails.simpu.co/"
+      },
+      {
+        "label": "Inbox",
+        "href": "https://inbox.simpu.co/"
       },
       {
         "label": "Support",
-        "href": "https://support.simpu.co/",
-        "icon": "life-buoy"
+        "href": "https://support.simpu.co/"
       },
       {
         "label": "Blog",
-        "href": "https://www.simpu.co/blog",
-        "icon": "newspaper"
+        "href": "https://www.simpu.co/blog"
       }
     ]
   },
@@ -94,6 +98,64 @@
           {
             "group": "Airtime",
             "pages": ["api-reference/airtime/buy"]
+          }
+        ]
+      },
+      {
+        "dropdown": "Client SDKs",
+        "icon": "code",
+        "description": "Client SDKs for Simpu's APIs",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["sdk/introduction"]
+          },
+          {
+            "group": "Mails",
+            "pages": [
+              "sdk/mails/introduction",
+              "sdk/mails/installation",
+              "sdk/mails/quickstart",
+              {
+                "group": "Components",
+                "icon": "atom",
+                "pages": [
+                  "sdk/mails/components/provider",
+                  "sdk/mails/components/sender-profile-select",
+                  {
+                    "group": "Analytics",
+                    "pages": [
+                      "sdk/mails/components/analytics/overview-item",
+                      "sdk/mails/components/analytics/engagement-item",
+                      "sdk/mails/components/analytics/delivery-chart"
+                    ]
+                  }
+                ]
+              },
+              {
+                "icon": "braces",
+                "group": "Hooks",
+                "pages": [
+                  "sdk/mails/hooks/broadcast",
+                  "sdk/mails/hooks/recipient",
+                  "sdk/mails/hooks/sender-profile",
+                  "sdk/mails/hooks/sending-domain",
+                  "sdk/mails/hooks/template"
+                ]
+              },
+              "sdk/mails/examples"
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "history",
+        "dropdown": "Changelog",
+        "description": "Updates and changes to Simpu's products",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": ["changelog/mails", "changelog/texts", "changelog/inbox"]
           }
         ]
       }

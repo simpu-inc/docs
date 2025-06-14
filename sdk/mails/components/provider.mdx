@@ -1,0 +1,40 @@
+---
+title: "Simpu Provider"
+---
+
+The main provider component that wraps your application and provides context for all other components.
+
+```jsx
+import { SimpuProvider } from "@simpu/mail-sdk";
+
+function App() {
+  return (
+    <SimpuProvider
+      apiUrl="https://api.simpu.co"
+      accessToken="your-access-token"
+      organisationID="your-organisation-id"
+    >
+      {/* Your app components */}
+    </SimpuProvider>
+  );
+}
+```
+
+<Note>
+  **Always wrap your app with the SimpuProvider** - This ensures all components
+  and hooks have access to the necessary Simpu API context.
+</Note>
+
+#### Props
+
+<ParamField path="apiUrl" type="string">
+  The base URL for the Simpu API
+</ParamField>
+
+<ParamField path="accessToken" type="string">
+  Your authentication token
+</ParamField>
+
+<ParamField path="organisationID" type="string">
+  Your organisation ID
+</ParamField>

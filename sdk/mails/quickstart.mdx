@@ -1,0 +1,139 @@
+---
+title: "Quickstart"
+icon: "rocket"
+---
+
+## Quick Start
+
+### 1. Setup the Provider
+
+First, wrap your application with the `SimpuProvider` to enable all SDK functionality:
+
+```jsx
+import React from "react";
+import { SimpuProvider } from "@simpu/mail-sdk";
+import "@simpu/mail-sdk/core/styles.css";
+
+function App() {
+  return (
+    <SimpuProvider
+      apiUrl="https://api.simpu.co"
+      accessToken="your-access-token"
+      organisationID="your-organisation-id"
+    >
+      {/* Your app components */}
+    </SimpuProvider>
+  );
+}
+
+export default App;
+```
+
+### 2. Import CSS styles (optional)
+
+Import the styles file if you are using UI components from the SDK. You don't need to import this if you aren't using UI components from the SDK:
+
+```jsx
+import "@simpu/mail-sdk/core/styles.css";
+```
+
+### 3. Use Components
+
+Import and use any SDK component in your React components:
+
+```jsx
+import React from "react";
+import {
+  ImportFileUpload,
+  SenderProfileSelect,
+  AnalyticsOverviewItem,
+} from "@simpu/mail-sdk";
+
+function Dashboard() {
+  return (
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Email Dashboard</h1>
+
+      <SenderProfileSelect />
+
+      <ImportFileUpload
+        onUploadSuccess={(data) => {
+          console.log("Upload successful:", data);
+        }}
+        onUploadError={(error) => {
+          console.error("Upload failed:", error);
+        }}
+      />
+
+      <AnalyticsOverviewItem.Container>
+        <AnalyticsOverviewItem.Bar
+          className="bg-blue-500"
+          style={{ height: "80px", width: "60px" }}
+        />
+        <div>
+          <AnalyticsOverviewItem.Text>
+            Engagement Rate
+          </AnalyticsOverviewItem.Text>
+          <AnalyticsOverviewItem.Caption>
+            Last 30 days
+          </AnalyticsOverviewItem.Caption>
+        </div>
+      </AnalyticsOverviewItem.Container>
+    </div>
+  );
+}
+
+export default Dashboard;
+```
+
+### 4. Use Hooks
+
+The SDK provides various hooks for data management:
+
+```jsx
+import React from "react";
+import { useBroadcast, useSenderProfiles } from "@simpu/mail-sdk";
+
+function EmailManager() {
+  const { broadcasts, loading, createBroadcast } = useBroadcast();
+  const { profiles, selectedProfile, setSelectedProfile } = useSenderProfiles();
+
+  const handleCreateBroadcast = async () => {
+    try {
+      await createBroadcast({
+        subject: "Welcome Email",
+        content: "Welcome to our service!",
+        senderProfileId: selectedProfile?.id,
+      });
+    } catch (error) {
+      console.error("Failed to create broadcast:", error);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>Email Broadcasts</h2>
+      <button onClick={handleCreateBroadcast}>Create New Broadcast</button>
+
+      <ul>
+        {broadcasts.map((broadcast) => (
+          <li key={broadcast.id}>{broadcast.subject}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default EmailManager;
+```
+
+## Next Steps
+
+- Explore the [Components](/sdk/mails/components/provider) documentation for detailed component guides.
+- Check out the [Hooks](/sdk/mails/hooks/broadcast) documentation for data management patterns.
+- See [Examples](/sdk/mails/examples) for complete implementation examples.
+- Review the API documentation for backend integration details.
+
+Happy building! 🚀
