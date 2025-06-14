@@ -1,0 +1,102 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Simpu",
+  "theme": "maple",
+  "description": "Simpu is a unified customer engagement platform that helps businesses manage customer interactions across multiple channels, including SMS, email, and more.",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg",
+    "href": "https://www.simpu.co"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#026AE8",
+    "light": "#0082F3",
+    "dark": "#026AE8"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Texts App",
+        "href": "https://texts.simpu.co/",
+        "icon": "message-square"
+      },
+      {
+        "label": "Mails App",
+        "href": "https://mails.simpu.co/",
+        "icon": "mail"
+      },
+      {
+        "label": "Support",
+        "href": "https://support.simpu.co/",
+        "icon": "life-buoy"
+      },
+      {
+        "label": "Blog",
+        "href": "https://www.simpu.co/blog",
+        "icon": "newspaper"
+      }
+    ]
+  },
+  "navigation": {
+    "dropdowns": [
+      {
+        "dropdown": "API Reference",
+        "icon": "square-terminal",
+        "description": "Reference for Simpu's APIs",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/authentication",
+              "api-reference/data-model",
+              "api-reference/webhooks"
+            ]
+          },
+          {
+            "group": "OTP",
+            "pages": [
+              "api-reference/otp/request",
+              "api-reference/otp/verify",
+              "api-reference/otp/revoke",
+              "api-reference/otp/get",
+              "api-reference/otp/get-by-recipient"
+            ]
+          },
+          {
+            "group": "Texts",
+            "pages": [
+              "api-reference/sms/send",
+              "api-reference/lookup/phone",
+              "api-reference/sms/smpp-error-codes",
+              "api-reference/sms/gsm-character-sets"
+            ]
+          },
+          {
+            "group": "Mails",
+            "pages": ["api-reference/mails/send"]
+          },
+          {
+            "group": "List",
+            "pages": [
+              "api-reference/lists/get_contact_list",
+              "api-reference/lists/query_rows",
+              "api-reference/lists/create_row",
+              "api-reference/lists/update_row",
+              "api-reference/lists/get_row",
+              "api-reference/lists/delete_row"
+            ]
+          },
+          {
+            "group": "Airtime",
+            "pages": ["api-reference/airtime/buy"]
+          }
+        ]
+      }
+    ]
+  }
+}
