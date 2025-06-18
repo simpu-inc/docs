@@ -121,7 +121,10 @@
                 "icon": "atom",
                 "pages": [
                   "sdk/mails/components/provider",
+                  "sdk/mails/components/import-file-upload",
                   "sdk/mails/components/sender-profile-select",
+                  "sdk/mails/components/template-item",
+                  "sdk/mails/components/template-preview",
                   {
                     "group": "Analytics",
                     "pages": [

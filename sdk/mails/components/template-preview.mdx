@@ -1,0 +1,55 @@
+---
+title: Template Preview
+---
+
+### TemplatePreview
+
+A component for previewing email templates in both desktop and mobile modes using an iframe.
+
+```jsx
+import { TemplatePreview } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  const htmlContent = `
+    <html>
+      <body>
+        <h1>Hello World!</h1>
+        <p>This is a sample email template.</p>
+      </body>
+    </html>
+  `;
+
+  return (
+    <TemplatePreview
+      html={htmlContent}
+      title="Newsletter Template"
+      mode="desktop"
+      classNames={{
+        container: "bg-gray-50 p-4",
+        iframeContainer: "border-2 border-blue-300",
+        iframe: "rounded-lg",
+      }}
+    />
+  );
+}
+```
+
+#### Props
+
+<ParamField path="html" type="string" required>
+  The HTML content to preview.
+</ParamField>
+<ParamField path="title" type="string">
+  Title for the iframe accessibility.
+</ParamField>
+<ParamField path="mode" type="'desktop' | 'mobile'" defaultValue="'desktop'">
+  Preview mode - affects iframe dimensions and styling.
+</ParamField>
+<ParamField path="classNames" type="object">
+  Custom CSS classes for container, iframeContainer, iframe
+</ParamField>
+
+#### Mode Differences
+
+- **Desktop mode**: Full-width preview with standard border styling
+- **Mobile mode**: Fixed 375px width with mobile-optimized styling and rounded corners
