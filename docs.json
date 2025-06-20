@@ -117,33 +117,30 @@
               "sdk/mails/installation",
               "sdk/mails/quickstart",
               {
-                "group": "Components",
-                "icon": "atom",
+                "group": "Core",
+                "icon": "package",
                 "pages": [
-                  "sdk/mails/components/provider",
-                  "sdk/mails/components/import-file-upload",
-                  "sdk/mails/components/sender-profile-select",
-                  "sdk/mails/components/template-item",
-                  "sdk/mails/components/template-preview",
-                  {
-                    "group": "Analytics",
-                    "pages": [
-                      "sdk/mails/components/analytics/overview-item",
-                      "sdk/mails/components/analytics/engagement-item",
-                      "sdk/mails/components/analytics/delivery-chart"
-                    ]
-                  }
+                  "sdk/mails/core/introduction",
+                  "sdk/mails/core/provider",
+                  "sdk/mails/core/recipient",
+                  "sdk/mails/core/sender-profile",
+                  "sdk/mails/core/sending-domain",
+                  "sdk/mails/core/template"
                 ]
               },
               {
-                "icon": "braces",
-                "group": "Hooks",
+                "group": "UI",
+                "icon": "monitor-dot",
                 "pages": [
-                  "sdk/mails/hooks/broadcast",
-                  "sdk/mails/hooks/recipient",
-                  "sdk/mails/hooks/sender-profile",
-                  "sdk/mails/hooks/sending-domain",
-                  "sdk/mails/hooks/template"
+                  "sdk/mails/ui/introduction",
+                  {
+                    "group": "Components",
+                    "pages": [
+                      "sdk/mails/ui/components/overview-item",
+                      "sdk/mails/ui/components/engagement-item",
+                      "sdk/mails/ui/components/delivery-chart"
+                    ]
+                  }
                 ]
               },
               "sdk/mails/examples"
