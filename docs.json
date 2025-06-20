@@ -115,7 +115,6 @@
             "pages": [
               "sdk/mails/introduction",
               "sdk/mails/installation",
-              "sdk/mails/quickstart",
               {
                 "group": "Core",
                 "icon": "package",
@@ -140,6 +139,10 @@
                       "sdk/mails/ui/components/engagement-item",
                       "sdk/mails/ui/components/delivery-chart"
                     ]
+                  },
+                  {
+                    "group": "Pages",
+                    "pages": ["sdk/mails/ui/pages/overview"]
                   }
                 ]
               },

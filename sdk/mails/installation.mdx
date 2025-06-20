@@ -29,8 +29,22 @@ pnpm add @simpu/mail-sdk
 >
 ```
 
+<Note>
+  **Always wrap your app with the SimpuProvider** - This ensures all components
+  and hooks have access to the necessary Simpu API context.
+</Note>
+
 2. Import CSS styles (optional)
 
 ```jsx
-import "@simpu/mail-sdk/core/styles.css";
+import "@simpu/mail-sdk/styles.css";
 ```
+
+## Next Steps
+
+- Explore the [Core](/sdk/mails/core/introduction) SDK package if you need to implement core email functionality without the SDK's built-in UI components.
+- Check out the [UI](/sdk/mails/ui/introduction) package with pre-built UI components and pages for quickly integrating email marketing into your product.
+- See [Examples](/sdk/mails/examples) for complete implementation examples.
+- Review the API documentation for backend integration details.
+
+Happy building! 🚀
