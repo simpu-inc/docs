@@ -1,3 +1,82 @@
 ---
-title: Sender Profiles Hooks
+title: Sender Profile Hooks
 ---
+
+Hooks for fetching and managing sender profiles in email campaigns, including creating, updating, and deleting profiles.
+
+## useGetSenderProfiles
+
+The `useGetSenderProfiles` hook fetches email sender profiles, allowing you to retrieve a list of profiles and their details.
+
+<a
+  target="_blank"
+  href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+  className="border text-sm inline-block w-auto h-10 flex justify-self-start items-center justify-center text-center px-4 rounded-md border-gray-950/10 dark:border-white/10"
+>
+  <span>API Reference</span>
+</a>
+
+### Usage
+
+```typescript
+import { useGetSenderProfiles } from "@simpu/mail-sdk";
+
+function SenderProfilesPage() {
+  const { data, isPending, isError } = useGetSenderProfiles();
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading sender profiles</div>;
+  }
+
+  return (
+    <div>
+      {data.map((profile) => (
+        <div key={profile.id}>
+          <h3>{profile.name}</h3>
+          <p>Email: {profile.email}</p>
+          <p>Default: {profile.isDefault ? "Yes" : "No"}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## useSenderProfiles
+
+The `useSenderProfiles` hook manages email sender profiles including creation, updates, deletion, and setting default profiles.
+
+### Usage
+
+```typescript
+import { useSenderProfiles } from "@simpu/mail-sdk";
+
+function SenderProfilesComponent() {
+  const {
+    onCreateSenderProfile,
+    onUpdateSenderProfile,
+    onDeleteSenderProfile,
+    onSetDefaultSenderProfile,
+  } = useSenderProfiles();
+
+  const handleCreateProfile = async (
+    profileData: EmailSenderProfileResponse
+  ) => {
+    const result = await onCreateSenderProfile(profileData);
+    if (result) {
+      console.log("Profile created:", result);
+    }
+  };
+}
+```
+
+### Return Values
+
+- `onCreateSenderProfile(values: Omit<EmailSenderProfileResponse, "id">)` - Creates a new sender profile
+- `onUpdateSenderProfile(values: Omit<EmailSenderProfileResponse, "id">)` - Updates an existing sender profile
+- `onDeleteSenderProfile(id: string)` - Deletes a sender profile
+- `onSetDefaultSenderProfile(id: string)` - Sets a sender profile as default

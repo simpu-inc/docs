@@ -1,0 +1,72 @@
+---
+title: Email Domain Hooks
+---
+
+Hooks for fetching and managing email domains.
+
+## useGetEmailDomains
+
+The `useGetEmailDomains` hook fetches email domains, allowing you to retrieve a list of domains and their details.
+
+<a
+  target="_blank"
+  href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+  className="border text-sm inline-block w-auto h-10 flex justify-self-start items-center justify-center text-center px-4 rounded-md border-gray-950/10 dark:border-white/10"
+>
+  <span>API Reference</span>
+</a>
+
+### Usage
+
+```typescript
+import { useGetEmailDomains } from "@simpu/mail-sdk";
+
+function SendingDomainsPage() {
+  const { data, isPending, isError } = useGetEmailDomains();
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading sending domains</div>;
+  }
+
+  return (
+    <div>
+      {data.map((domain) => (
+        <div key={domain.id}>
+          <h3>{domain.domain}</h3>
+          <p>Status: {domain.status}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## useEmailDomains
+
+The `useEmailDomains` hook manages email domains including creation, verification, and deletion of domains.
+
+### Usage
+
+```typescript
+import { useEmailDomains } from "@simpu/mail-sdk";
+
+function SendingDomainsComponent() {
+  const { onCreateDomain, onVerifyDomain } = useEmailDomains();
+
+  const handleCreateDomain = async (domainData: { domain: string }) => {
+    const result = await onCreateDomain(domainData);
+    if (result) {
+      console.log("Domain created:", result);
+    }
+  };
+}
+```
+
+### Return Values
+
+- `onCreateDomain(payload: { domain: string })` - Creates a new email domain
+- `onVerifyDomain(domainId: string)` - Verifies an email domain

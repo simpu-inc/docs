@@ -121,9 +121,10 @@
                 "pages": [
                   "sdk/mails/core/introduction",
                   "sdk/mails/core/provider",
+                  "sdk/mails/core/broadcast",
                   "sdk/mails/core/recipient",
                   "sdk/mails/core/sender-profile",
-                  "sdk/mails/core/sending-domain",
+                  "sdk/mails/core/domain",
                   "sdk/mails/core/template"
                 ]
               },
