@@ -2,7 +2,22 @@
 title: Email Domain Hooks
 ---
 
-Hooks for fetching and managing email domains.
+## What is an Email Sending Domain?
+
+An email sending domain is a domain that you own and configure to send emails from your email marketing campaigns. It serves as the "From" address domain for your emails (e.g., if you send from `newsletter@yourdomain.com`, then `yourdomain.com` is your email sending domain).
+
+### Why Use Email Sending Domains?
+
+- **Improved Deliverability**: ISPs trust emails from verified domains more than generic sending services
+- **Brand Recognition**: Recipients see emails coming from your branded domain
+- **Authentication**: Enables proper SPF, DKIM, and DMARC authentication
+- **Reputation Building**: Builds sender reputation tied to your domain rather than a shared service
+
+### Domain Verification Process
+
+Before you can send emails from a domain, it must be verified through DNS records to prove ownership and enable proper email authentication.
+
+Simpu provides APIs to register and manage sending domains via the hooks defined below.
 
 ## useGetEmailDomains
 
