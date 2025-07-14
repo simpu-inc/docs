@@ -1,0 +1,33 @@
+---
+title: Import File Upload
+---
+
+A file upload component specifically designed for importing data files.
+
+```jsx
+import { ImportFileUpload } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  return (
+    <ImportFileUpload
+      buttonProps={{ variant: "outline" }}
+      onUploadError={(error) => console.error("Upload failed:", error)}
+      onUploadSuccess={(data) => console.log("Upload successful:", data)}
+    />
+  );
+}
+```
+
+#### Props
+
+<ParamField path="buttonProps" type="object">
+  Props to pass to the upload button
+</ParamField>
+
+<ParamField path="onUploadSuccess" type="function">
+  Callback fired when upload succeeds
+</ParamField>
+
+<ParamField path="onUploadError" type="function">
+  Callback fired when upload fails
+</ParamField>

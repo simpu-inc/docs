@@ -1,0 +1,148 @@
+---
+title: "Introduction"
+---
+
+The **Simpu Mails SDK Core Package** provides a comprehensive set of React hooks and utilities for seamlessly integrating with Simpu's Email Marketing API infrastructure. This package is designed for developers who need granular control over their email marketing functionality and prefer to build custom interfaces while leveraging powerful backend capabilities.
+
+The core package serves as the foundation layer of the Simpu Mails SDK, offering:
+
+- **React Hooks**: Pre-built hooks for all major email marketing operations
+- **Type Safety**: Full TypeScript support with comprehensive type definitions
+- **API Abstraction**: Clean abstractions over Simpu's Email marketing API endpoints
+- **Optimistic Updates**: Smart caching and optimistic UI updates for better user experience
+
+## When to Use the Core Package
+
+Choose the core package when you:
+
+- Need custom UI implementations that don't match the pre-built components
+- Want maximum flexibility and control over your email marketing interface
+- Are integrating email marketing features into an existing design system
+- Require specific business logic that goes beyond standard implementations
+- Prefer to build components from scratch using your preferred UI library
+
+## Installation
+
+Install the core package alongside the main SDK:
+
+```bash
+npm install @simpu/mail-sdk
+# or
+yarn add @simpu/mail-sdk
+# or
+pnpm add @simpu/mail-sdk
+```
+
+## Quick Start
+
+### 1. Setup the Provider
+
+Wrap your application with the `SimpuProvider`:
+
+```jsx
+import { SimpuProvider } from "@simpu/mail-sdk/core";
+
+function App() {
+  return (
+    <SimpuProvider
+      apiUrl="https://api.simpu.co"
+      accessToken="your-access-token"
+      organisationID="your-organisation-id"
+    >
+      <YourEmailMarketingApp />
+    </SimpuProvider>
+  );
+}
+```
+
+### 2. Use Core Hooks
+
+Import and use hooks in your components:
+
+```jsx
+import { useBroadcasts, useGetTemplates } from "@simpu/mail-sdk/core";
+
+function EmailDashboard() {
+  const { data: broadcasts, loading, error } = useGetBroadcasts();
+  const { data: templates } = useGetTemplates();
+
+  if (loading) return <div>Loading campaigns...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <h2>Recent Campaigns ({broadcasts.length})</h2>
+      {broadcasts.map((broadcast) => (
+        <div key={broadcast.id}>
+          <h3>{broadcast.name}</h3>
+          <p>Status: {broadcast.status}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### 3. Handle Mutations
+
+Create and update data with mutation hooks:
+
+```jsx
+import { useBroadcast } from "@simpu/mail-sdk/core";
+
+function CreateCampaignForm() {
+  const { onCreateBroadcast } = useBroadcast();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (payload) => {
+    setLoading(true);
+    try {
+      const newBroadcast = await onCreateBroadcast(payload);
+      console.log("Campaign created:", newBroadcast);
+    } catch (err) {
+      console.error("Failed to create campaign:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Your form fields */}
+      <button type="submit" disabled={loading}>
+        {loading ? "Creating..." : "Create Campaign"}
+      </button>
+    </form>
+  );
+}
+```
+
+## Next Steps
+
+Ready to dive deeper? Explore the specific hook categories:
+
+<CardGroup cols={2}>
+  <Card title="Broadcasts" icon="megaphone" href="/sdk/mails/core/broadcast">
+    Manage email campaigns, scheduling, and sending
+  </Card>
+  <Card title="Templates" icon="file-text" href="/sdk/mails/core/template">
+    Create and manage email templates
+  </Card>
+  <Card title="Recipients" icon="users" href="/sdk/mails/core/recipient">
+    Handle contact lists and recipient management
+  </Card>
+  <Card
+    title="Sender Profiles"
+    icon="user"
+    href="/sdk/mails/core/sender-profile"
+  >
+    Configure sender identities and from addresses
+  </Card>
+</CardGroup>
+
+<Note>
+  **Need UI Components?** If you prefer pre-built components over custom
+  implementations, check out the [UI Package](/sdk/mails/ui/introduction) which
+  provides ready-to-use React components built on top of these core hooks.
+</Note>

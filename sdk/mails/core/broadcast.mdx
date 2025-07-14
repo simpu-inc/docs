@@ -1,0 +1,195 @@
+---
+title: Broadcast Hooks
+---
+
+Hooks for fetching and managing email broadcasts.
+
+## useGetBroadcasts
+
+The `useGetBroadcasts` hook fetches email broadcasts, allowing you to retrieve a list of broadcasts and their details.
+
+<a
+  target="_blank"
+  href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+  className="border text-sm inline-block w-auto h-10 flex justify-self-start items-center justify-center text-center px-4 rounded-md border-gray-950/10 dark:border-white/10"
+>
+  <span>API Reference</span>
+</a>
+
+### Usage
+
+```typescript
+import { useGetBroadcasts } from "@simpu/mail-sdk";
+
+function SendingDomainsPage() {
+  const { data, isPending, isError } = useGetBroadcasts({
+    params: {
+      page: 1,
+      limit: 10,
+    },
+  });
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading broadcasts</div>;
+  }
+
+  return (
+    <div>
+      {data.map((broadcast) => (
+        <div key={broadcast.id}>
+          <h3>{broadcast.name}</h3>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Parameters
+
+```typescript
+interface Params {
+  params?: {
+    page?: number;
+    limit?: number;
+    state?: CampaignData["state"];
+  };
+}
+```
+
+## useSearchBroadcasts
+
+The `useSearchBroadcasts` hook allows you to search for email broadcasts based on specific criteria.
+
+<a
+  target="_blank"
+  href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+  className="border text-sm inline-block w-auto h-10 flex justify-self-start items-center justify-center text-center px-4 rounded-md border-gray-950/10 dark:border-white/10"
+>
+  <span>API Reference</span>
+</a>
+
+### Usage
+
+```typescript
+import { useSearchBroadcasts } from "@simpu/mail-sdk";
+
+function SendingDomainsPage() {
+  const { data, isPending, isError } = useSearchBroadcasts();
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading broadcasts</div>;
+  }
+
+  return (
+    <div>
+      {data.map((broadcast) => (
+        <div key={broadcast.id}>
+          <h3>{broadcast.name}</h3>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Parameters
+
+```typescript
+interface Params {
+  query: string;
+  state?: CampaignData["state"];
+}
+```
+
+## useGetBroadcast
+
+The `useGetBroadcast` hook fetches a specific email broadcast by its ID, allowing you to retrieve its details.
+
+<a
+  target="_blank"
+  href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+  className="border text-sm inline-block w-auto h-10 flex justify-self-start items-center justify-center text-center px-4 rounded-md border-gray-950/10 dark:border-white/10"
+>
+  <span>API Reference</span>
+</a>
+
+### Usage
+
+```typescript
+import { useGetBroadcast } from "@simpu/mail-sdk";
+
+function SendingDomainsPage() {
+  const { data, isPending, isError } = useGetBroadcast("1234");
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading broadcast</div>;
+  }
+
+  return (
+    <div>
+      {data.map((broadcast) => (
+        <div key={broadcast.id}>
+          <h3>{broadcast.name}</h3>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Parameters
+
+```typescript
+interface Params {
+  id: string;
+}
+```
+
+## useBroadcast
+
+The `useBroadcast` hook provides comprehensive functionality for managing email campaigns (broadcasts) including creation, updates, deletion, duplication, and state management.
+
+### Usage
+
+```typescript
+import { useBroadcast } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  const {
+    onCreateBroadcast,
+    onUpdateBroadcast,
+    onDeleteBroadcast,
+    onDuplicateBroadcast,
+    onChangeBroadcastState,
+    onBulkDeleteBroadcasts,
+    onCreateAndSendBroadcast,
+    onSendTestEmail,
+  } = useBroadcast();
+
+  // Use the hook methods
+}
+```
+
+### Return Values
+
+- `onCreateBroadcast(payload: Partial<CampaignData>)` - Creates a new broadcast
+- `onUpdateBroadcast(payload: Partial<CampaignData>)` - Updates an existing broadcast
+- `onDeleteBroadcast(broadcastId: string)` - Deletes a broadcast
+- `onDuplicateBroadcast(broadcastId: string)` - Duplicates a broadcast
+- `onChangeBroadcastState(broadcastId: string, state: CampaignData["state"])` - Changes broadcast state
+- `onBulkDeleteBroadcasts(broadcastIds: string[])` - Deletes multiple broadcasts
+- `onCreateAndSendBroadcast(payload)` - Creates and sends a broadcast with recipients
+- `onSendTestEmail(recipients, broadcast)` - Sends a test email

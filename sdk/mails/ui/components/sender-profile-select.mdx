@@ -1,0 +1,23 @@
+---
+title: Sender Profile Select
+---
+
+A dropdown component for selecting sender profiles.
+
+```jsx
+import { SenderProfileSelect } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  return <SenderProfileSelect />;
+}
+```
+
+#### Props
+
+<ParamField path="value" type="string[]" required>
+  The controlled keys of the selected items
+</ParamField>
+
+<ParamField path="onValueChange" type="function" required>
+  The callback fired when the selected item changes.
+</ParamField>

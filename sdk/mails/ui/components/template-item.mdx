@@ -1,0 +1,59 @@
+---
+title: Template Item
+---
+
+A component for displaying email templates in a card-like format with an image preview and name.
+
+```jsx
+import { TemplateItem } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  return (
+    <TemplateItem
+      name="Marketing Newsletter"
+      image="https://example.com/template-preview.jpg"
+      onClick={() => console.log("Template selected")}
+      classNames={{
+        container: "hover:shadow-lg transition-shadow",
+        image: "border-2 border-gray-200",
+        label: "text-lg font-semibold",
+      }}
+    />
+  );
+}
+```
+
+#### Props
+
+<ParamField path="name" type="string" required>
+  The name of the template to display.
+</ParamField>
+<ParamField path="image" type="string" required>
+  The URL of the image to display as a preview.
+</ParamField>
+<ParamField path="onClick" type="function">
+  Callback fired when the template is clicked. This is useful for selecting the
+  template or navigating to another page with the template details.
+</ParamField>
+<ParamField path="classNames" type="object">
+  Optional class names to apply to the container, image, and label elements.
+</ParamField>
+
+The `TemplateItem` also exports individual components for custom compositions:
+
+```jsx
+import {
+  TemplateItemContainer,
+  TemplateItemImage,
+  TemplateItemName,
+} from "@simpu/mail-sdk";
+
+function CustomTemplateItem() {
+  return (
+    <TemplateItemContainer onClick={handleClick}>
+      <TemplateItemImage image="template-preview.jpg" />
+      <TemplateItemName>Custom Template</TemplateItemName>
+    </TemplateItemContainer>
+  );
+}
+```

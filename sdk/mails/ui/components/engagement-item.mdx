@@ -1,0 +1,33 @@
+---
+title: Engagement Item
+---
+
+Components for displaying email engagement metrics with circular progress bars.
+
+```jsx
+import { AnalyticsEngagementItem } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  return <AnalyticsEngagementItem.ProgressBar value={75} color="green" />;
+}
+```
+
+## Props
+
+### ProgressBar
+
+<ParamField path="label" type="string">
+  Label for the metric being visualized
+</ParamField>
+
+<ParamField path="size" type="number">
+  Width and height of the progress bar
+</ParamField>
+
+<ParamField path="thickness" type="string">
+  Thickness of the progress bar ring
+</ParamField>
+
+<ParamField path="color" type="string">
+  Color of progress bar track
+</ParamField>

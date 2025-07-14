@@ -1,0 +1,26 @@
+---
+title: Overview Item
+---
+
+A flexible component for displaying email metrics overview data with customizable bars and text.
+
+```jsx
+import { AnalyticsOverviewItem } from "@simpu/mail-sdk";
+
+function MyComponent() {
+  return (
+    <AnalyticsOverviewItem.Container>
+      <AnalyticsOverviewItem.Bar
+        className="bg-blue-500"
+        style={{ height: "80px", width: "60px" }}
+      />
+      <div>
+        <AnalyticsOverviewItem.Text>Open Rate</AnalyticsOverviewItem.Text>
+        <AnalyticsOverviewItem.Caption>
+          Last 30 days
+        </AnalyticsOverviewItem.Caption>
+      </div>
+    </AnalyticsOverviewItem.Container>
+  );
+}
+```

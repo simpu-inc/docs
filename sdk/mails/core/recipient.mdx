@@ -1,0 +1,107 @@
+---
+title: Recipient Hooks
+---
+
+Hooks for managing recipients in email campaigns, including file uploads and import mapping.
+
+<Note>
+  Unlike other systems that require you download a sample file for recipients,
+  Simpu provides a more streamlined approach by allowing you to upload your own
+  files and allows you map columns to the recipient fields directly.
+</Note>
+
+## useSimpuFileUpload
+
+The `useSimpuFileUpload` hook handles recipient file uploads, including CSV and Excel file processing for campaign recipients.
+
+### Usage
+
+```typescript
+import { useSimpuFileUpload } from "@simpu/mail-sdk";
+
+function FileUploadComponent() {
+  const {
+    isUploading,
+    onUploadFile,
+    onUploadBlob,
+    onProcessCSVFile,
+    onProcessExcelFile,
+    onFileUploadDropRejected,
+  } = useSimpuFileUpload();
+
+  const handleFileUpload = async (file: File) => {
+    const result = await onUploadFile("csv", file);
+    if (result) {
+      console.log("Upload successful:", result);
+    }
+  };
+}
+```
+
+### Return Values
+
+- `onUploadFile(fileType: "csv" | "excel", file: File)` - Uploads a file and returns import data and columns
+- `onUploadBlob(blob: Blob)` - Uploads a blob as a file
+- `onProcessCSVFile(file: File)` - Processes CSV file and returns sample data (up to 500 rows of the file) for use when auto-detecting columns
+- `onProcessExcelFile(file: File)` - Processes Excel file and returns sample data (up to 500 rows of the file) for use when auto-detecting columns
+- `onFileUploadDropRejected({ files: File[] })` - Handles rejected file uploads, such as unsupported file types or size limits
+
+---
+
+## useImportMapping
+
+The `useImportMapping` hook manages column mapping for imported files, including auto-detection of column types and manual mapping configuration.
+
+### Usage
+
+```typescript
+import { useImportMapping } from "@simpu/mail-sdk";
+
+function ImportMappingComponent() {
+  const {
+    mappedProperties,
+    autoDetectionLoading,
+    hasSelectedEmailColumn,
+    onMapColumns,
+    onPropertyUpdate,
+    onAutoDetectColumns,
+  } = useImportMapping({
+    importedColumns: [
+      { name: "Email", id: "1" },
+      { name: "First Name", id: "2" },
+      { name: "Last Name", id: "3" },
+    ],
+    onMapColumnsError: (error) => console.error("Mapping failed:", error),
+    onAutoDetectionError: (error) =>
+      console.error("Auto-detection failed:", error),
+  });
+
+  const handleAutoDetect = async (sampleData: any[]) => {
+    await onAutoDetectColumns(sampleData);
+  };
+}
+```
+
+### Parameters
+
+```typescript
+interface UseImportMappingProps {
+  importedColumns?: { name: string; id: string }[];
+  onMapColumnsError?: (error: any) => void;
+  onAutoDetectionError?: (error: any) => void;
+}
+```
+
+### Return Values
+
+#### State
+
+- `mappedProperties: PropertySchema[]` - Array of mapped properties
+- `autoDetectionLoading: boolean` - True when auto-detecting column types
+- `hasSelectedEmailColumn: boolean` - True if an email column is selected
+
+#### Methods
+
+- `onMapColumns(importId: string, mapping: Record<string, PropertySchema>)` - Maps columns for import
+- `onPropertyUpdate(property: PropertySchema, index: number)` - Updates a property
+- `onAutoDetectColumns(dataSample?: any[])` - Auto-detects column types from sample data
