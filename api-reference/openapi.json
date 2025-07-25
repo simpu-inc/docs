@@ -361,9 +361,9 @@
           }
         }
       },
-     "delete": {
-       "description": "Delete a specific row from the contact table",
-      "parameters": [
+      "delete": {
+        "description": "Delete a specific row from the contact table",
+        "parameters": [
           {
             "name": "row_id",
             "in": "path",
@@ -375,23 +375,23 @@
             }
           }
         ],
-      "responses": {
-        "204": {
-          "description": "Row deleted successfully. No content is returned.",
-          "content": {}
-        },
-        "400": {
-          "description": "unexpected error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
+        "responses": {
+          "204": {
+            "description": "Row deleted successfully. No content is returned.",
+            "content": {}
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
         }
       }
-    }
     },
     "/lists/contact/row/<row_id>": {
       "get": {
@@ -440,7 +440,7 @@
         }
       }
     },
-      "/lists/contact": {
+    "/lists/contact": {
       "get": {
         "description": "Gets the contact list for the organisation.If no contact table exists, it creates a default template table.",
         "parameters": [],
@@ -450,10 +450,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                      "$ref": "#/components/schemas/Table"
-                    }
+                  "$ref": "#/components/schemas/Table"
                 }
-             }
+              }
+            }
           },
 
           "400": {
@@ -648,12 +648,7 @@
   "components": {
     "schemas": {
       "SMS": {
-        "required": [
-          "id",
-          "recipients",
-          "is_trackable",
-          "sender_id"
-        ],
+        "required": ["id", "recipients", "is_trackable", "sender_id"],
         "type": "object",
         "properties": {
           "id": {
@@ -664,9 +659,7 @@
           "recipients": {
             "description": "Recipients of the SMS message",
             "type": "array",
-            "example": [
-              "2348023456789"
-            ]
+            "example": ["2348023456789"]
           },
           "sender_id": {
             "description": "Sender ID of the SMS message",
@@ -722,11 +715,7 @@
         }
       },
       "Email": {
-        "required": [
-          "id",
-          "sender_id",
-          "recipients"
-        ],
+        "required": ["id", "sender_id", "recipients"],
         "type": "object",
         "properties": {
           "id": {
@@ -737,9 +726,7 @@
           "recipients": {
             "description": "Recipients of the Email",
             "type": "array",
-            "example": [
-              "mack@acme.com"
-            ]
+            "example": ["mack@acme.com"]
           },
           "sender_id": {
             "description": "Sender ID of the Email",
@@ -833,13 +820,7 @@
             "description": "The network carrier of the airtime",
             "type": "string",
             "example": "Airtel",
-            "enum": [
-              "Airtel",
-              "MTN",
-              "Glo",
-              "9mobile",
-              "NTEL"
-            ]
+            "enum": ["Airtel", "MTN", "Glo", "9mobile", "NTEL"]
           },
           "meta": {
             "$ref": "#/components/schemas/MetaAirtime"
@@ -847,9 +828,7 @@
         }
       },
       "LookupPhone": {
-        "required": [
-          "msisdn"
-        ],
+        "required": ["msisdn"],
         "type": "object",
         "properties": {
           "msisdn": {
@@ -880,10 +859,7 @@
         }
       },
       "Row": {
-        "required": [
-          "id",
-          "columns"
-        ],
+        "required": ["id", "columns"],
         "type": "object",
         "properties": {
           "id": {
@@ -944,10 +920,7 @@
         }
       },
       "Table": {
-        "required": [
-          "id",
-          "columns"
-        ],
+        "required": ["id", "columns"],
         "type": "object",
         "properties": {
           "id": {
@@ -992,11 +965,7 @@
         }
       },
       "TableColumn": {
-        "required": [
-          "id",
-          "name",
-          "type"
-        ],
+        "required": ["id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -1027,9 +996,7 @@
         }
       },
       "SmartList": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object",
         "properties": {
           "id": {
@@ -1104,20 +1071,17 @@
           "available_balance": {
             "description": "Available balance for the request",
             "type": "number",
-            "example": 1000.50
+            "example": 1000.5
           },
           "charge": {
             "description": "Charge for the request",
             "type": "number",
-            "example": 3.00
+            "example": 3.0
           },
           "encoding": {
             "description": "Encoding of the message",
             "type": "string",
-            "enum": [
-              "GSM",
-              "UCS-2"
-            ],
+            "enum": ["GSM", "UCS-2"],
             "example": "UTF-8"
           },
           "message_length": {
@@ -1133,16 +1097,13 @@
         }
       },
       "EstimateEmail": {
-        "required": [
-          "available_balance",
-          "charge"
-        ],
+        "required": ["available_balance", "charge"],
         "type": "object",
         "properties": {
           "available_balance": {
             "description": "Available balance for the request",
             "type": "number",
-            "example": 1000.50
+            "example": 1000.5
           },
           "charge": {
             "description": "Charge for the request",
@@ -1152,10 +1113,7 @@
         }
       },
       "MetaSMS": {
-        "required": [
-          "method",
-          "resource"
-        ],
+        "required": ["method", "resource"],
         "type": "object",
         "properties": {
           "method": {
@@ -1174,10 +1132,7 @@
         }
       },
       "MetaEmail": {
-        "required": [
-          "method",
-          "resource"
-        ],
+        "required": ["method", "resource"],
         "type": "object",
         "properties": {
           "method": {
@@ -1227,10 +1182,7 @@
         }
       },
       "MetaAirtime": {
-        "required": [
-          "method",
-          "resource"
-        ],
+        "required": ["method", "resource"],
         "type": "object",
         "properties": {
           "method": {
@@ -1298,10 +1250,7 @@
         }
       },
       "MetaQueryRows": {
-        "required": [
-          "method",
-          "resource"
-        ],
+        "required": ["method", "resource"],
         "type": "object",
         "properties": {
           "method": {
@@ -1320,10 +1269,7 @@
         }
       },
       "Personalisation": {
-        "required": [
-          "to",
-          "substitutions"
-        ],
+        "required": ["to", "substitutions"],
         "type": "object",
         "properties": {
           "to": {
@@ -1341,10 +1287,7 @@
         }
       },
       "PersonalisationEmail": {
-        "required": [
-          "to",
-          "substitutions"
-        ],
+        "required": ["to", "substitutions"],
         "type": "object",
         "properties": {
           "to": {
@@ -1364,6 +1307,12 @@
       "SendSMSRequest": {
         "type": "object",
         "properties": {
+          "channel": {
+            "description": "Channel to send the SMS message",
+            "type": "string",
+            "enum": ["sms", "whatsapp"],
+            "example": "sms"
+          },
           "recipients": {
             "description": "Recipients of the SMS message, comma separated list of phone numbers",
             "type": "string",
@@ -1409,16 +1358,10 @@
             "example": "https://example.com/sms/delivery_report"
           }
         },
-        "required": [
-          "recipients",
-          "sender_id"
-        ]
+        "required": ["recipients", "sender_id"]
       },
       "EmailSendRequest": {
-        "required": [
-          "recipients",
-          "sender_id"
-        ],
+        "required": ["recipients", "sender_id"],
         "type": "object",
         "properties": {
           "recipients": {
@@ -1477,9 +1420,7 @@
         }
       },
       "LookupPhoneRequest": {
-        "required": [
-          "phone"
-        ],
+        "required": ["phone"],
         "type": "object",
         "properties": {
           "phone": {
@@ -1517,30 +1458,24 @@
             "description": "The OTP token to send to the recipient, if not specified, a new token will be generated",
             "type": "string",
             "example": "123456"
+          },
+          "channel": {
+            "description": "Channel to send the OTP token",
+            "type": "string",
+            "enum": ["sms", "whatsapp"],
+            "example": "sms"
           }
         },
-        "required": [
-          "recipient"
-        ]
+        "required": ["recipient"]
       },
       "BuyAirtimeRequest": {
         "type": "object",
-        "required": [
-          "network",
-          "amount",
-          "recipient"
-        ],
+        "required": ["network", "amount", "recipient"],
         "properties": {
           "network": {
             "description": "The network carrier of the airtime",
             "type": "string",
-            "enum": [
-              "Airtel",
-              "MTN",
-              "Glo",
-              "9mobile",
-              "NTEL"
-            ],
+            "enum": ["Airtel", "MTN", "Glo", "9mobile", "NTEL"],
             "example": "Airtel"
           },
           "amount": {
@@ -1624,16 +1559,10 @@
             "example": "674535b2b39158b9aae90188fcec23eb"
           }
         },
-        "required": [
-          "token",
-          "id"
-        ]
+        "required": ["token", "id"]
       },
       "Error": {
-        "required": [
-          "status",
-          "message"
-        ],
+        "required": ["status", "message"],
         "type": "object",
         "properties": {
           "status": {
